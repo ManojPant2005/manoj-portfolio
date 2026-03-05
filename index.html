@@ -4,676 +4,664 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Manoj Pant — Full Stack .NET Developer</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
     :root {
-      --primary: #1a6b4a;
-      --primary-light: #2e9e72;
-      --primary-pale: #eaf4ee;
-      --accent: #f5a623;
-      --accent-pale: rgba(245,166,35,0.12);
-      --bg: #f5f8f5;
-      --card: #ffffff;
-      --text: #1a2820;
-      --muted: #607068;
-      --border: #d4e8dc;
+      --bg: #07090f;
+      --bg2: #0d1117;
+      --bg3: #141920;
+      --bor: #1e2736;
+      --bor2: #263040;
+      --txt: #e2e8f0;
+      --txt2: #8896aa;
+      --txt3: #4a5568;
+      --blue: #3b82f6;
+      --blue-dim: #1e40af22;
+      --blue-glow: #3b82f640;
+      --green: #22c55e;
+      --green-dim: #15803d22;
+      --amber: #f59e0b;
+      --amber-dim: #92400e22;
+      --red: #ef4444;
+      --red-dim: #991b1b22;
+      --purple: #a855f7;
+      --purple-dim: #6b21a822;
+      --cyan: #06b6d4;
+      --cyan-dim: #0e749022;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Outfit', sans-serif;
+      font-family: 'Syne', sans-serif;
       background: var(--bg);
-      color: var(--text);
+      color: var(--txt);
       line-height: 1.7;
       overflow-x: hidden;
     }
 
-    /* ─── NAV ─── */
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg2); }
+    ::-webkit-scrollbar-thumb { background: var(--bor2); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--blue); }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      background: rgba(245,248,245,0.94);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
+      background: rgba(7,9,15,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--bor);
       padding: 0 6%;
       display: flex; align-items: center; justify-content: space-between;
-      height: 66px;
+      height: 58px;
     }
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.45rem;
-      color: var(--primary);
+    .nav-brand {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem;
       font-weight: 700;
-      letter-spacing: 0.3px;
-    }
-    .nav-links { display: flex; gap: 2.2rem; list-style: none; align-items: center; }
-    .nav-links a {
-      text-decoration: none;
-      color: var(--muted);
-      font-size: 0.88rem;
-      font-weight: 500;
-      letter-spacing: 0.2px;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--primary); }
-    .nav-cta {
-      background: var(--primary) !important;
-      color: #fff !important;
-      padding: 9px 22px;
-      border-radius: 50px;
-    }
-    .nav-cta:hover { background: var(--primary-light) !important; }
-
-    /* ─── HERO ─── */
-    .hero {
-      min-height: 100vh;
-      background: linear-gradient(145deg, #eef6f0 0%, #f5f8f5 50%, #e8f2ec 100%);
-      display: flex; align-items: center;
-      padding: 100px 6% 70px;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-blob1 {
-      position: absolute; width: 700px; height: 700px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(46,158,114,0.10) 0%, transparent 65%);
-      top: -200px; right: -150px; pointer-events: none;
-    }
-    .hero-blob2 {
-      position: absolute; width: 500px; height: 500px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(245,166,35,0.07) 0%, transparent 65%);
-      bottom: -100px; left: 5%; pointer-events: none;
-    }
-    .hero-inner {
-      max-width: 1200px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 60px;
-      align-items: center;
-      width: 100%;
-    }
-
-    /* Left side */
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 9px;
-      background: rgba(26,107,74,0.09);
-      border: 1px solid rgba(26,107,74,0.2);
-      color: var(--primary);
-      font-size: 0.78rem;
-      font-weight: 600;
-      padding: 7px 16px;
-      border-radius: 50px;
-      margin-bottom: 1.4rem;
-      letter-spacing: 0.8px;
+      color: var(--txt2);
+      letter-spacing: .18em;
       text-transform: uppercase;
     }
-    .hero-badge .pulse-dot {
-      width: 8px; height: 8px;
-      background: #2e9e72;
-      border-radius: 50%;
+    .nav-brand span { color: var(--blue); }
+    .nav-links { display: flex; gap: 0; list-style: none; align-items: center; }
+    .nav-links a {
+      display: flex; align-items: center; height: 58px;
+      padding: 0 16px;
+      text-decoration: none;
+      color: var(--txt3);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      border-bottom: 2px solid transparent;
+      transition: all .2s;
+    }
+    .nav-links a:hover { color: var(--txt2); border-bottom-color: var(--bor2); }
+    .nav-cta {
+      background: var(--blue) !important;
+      color: #fff !important;
+      border-radius: 0 !important;
+      border-bottom: 2px solid transparent !important;
+      margin-left: 8px;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    }
+    .nav-cta:hover { background: #2563eb !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      padding: 100px 6% 80px;
+      position: relative;
+      display: flex; align-items: center;
+      overflow: hidden;
+    }
+
+    /* Grid background */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--bor) 1px, transparent 1px),
+        linear-gradient(90deg, var(--bor) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+      opacity: .3;
+    }
+
+    /* Glow orbs */
+    .hero-orb1 {
+      position: absolute; width: 600px; height: 600px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 65%);
+      top: -100px; right: -100px; pointer-events: none;
+    }
+    .hero-orb2 {
+      position: absolute; width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(168,85,247,0.07) 0%, transparent 65%);
+      bottom: 0; left: 0; pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1200px; margin: auto; width: 100%;
+      display: grid; grid-template-columns: 1.2fr 0.8fr;
+      gap: 60px; align-items: center; position: relative;
+    }
+
+    /* TAG */
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: var(--blue-dim);
+      border: 1px solid var(--blue-glow);
+      padding: 5px 12px; border-radius: 4px;
+      margin-bottom: 1.4rem;
+    }
+    .pulse-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
       animation: pulse 2s infinite;
     }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.45;transform:scale(1.4)} }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.5)} }
 
     .hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.8rem, 5.5vw, 4.2rem);
-      line-height: 1.08;
+      font-size: clamp(2.6rem, 5.5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.06;
+      letter-spacing: -.03em;
       margin-bottom: 1.2rem;
-      color: var(--text);
-      letter-spacing: -0.5px;
-      font-weight: 700;
+      color: var(--txt);
     }
-    .hero h1 em {
-      font-style: italic;
-      color: var(--primary);
-    }
-    .hero-summary {
-      color: var(--muted);
-      font-size: 1rem;
-      max-width: 500px;
-      margin-bottom: 0.9rem;
-      line-height: 1.75;
-    }
-    .hero-summary strong { color: var(--text); font-weight: 600; }
-    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.6rem; }
-    .btn-primary {
-      background: var(--primary);
-      color: #fff;
-      padding: 13px 28px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.92rem;
-      transition: all 0.25s;
-      display: inline-flex; align-items: center; gap: 8px;
-      letter-spacing: 0.2px;
-    }
-    .btn-primary:hover { background: var(--primary-light); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(26,107,74,0.28); }
-    .btn-outline {
-      border: 2px solid var(--border);
-      color: var(--text);
-      padding: 13px 28px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.92rem;
-      transition: all 0.25s;
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(255,255,255,0.6);
-    }
-    .btn-outline:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); }
+    .hero h1 .accent { color: var(--blue); }
+    .hero h1 .dim { color: var(--txt3); }
 
+    .hero-mono {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .75rem; color: var(--txt3);
+      margin-bottom: 1.2rem; line-height: 1.8;
+      border-left: 2px solid var(--bor2);
+      padding-left: 14px;
+    }
+    .hero-mono .key { color: var(--cyan); }
+    .hero-mono .val { color: var(--amber); }
+    .hero-mono .str { color: var(--green); }
+
+    .hero-desc {
+      font-size: .95rem; color: var(--txt2);
+      max-width: 520px; line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+    .hero-desc strong { color: var(--txt); font-weight: 700; }
+
+    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 2.6rem; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--blue); color: #fff;
+      padding: 11px 24px;
+      font-family: 'Syne', sans-serif;
+      font-size: .82rem; font-weight: 700; letter-spacing: .04em;
+      text-decoration: none;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+      transition: all .25s;
+    }
+    .btn-primary:hover { background: #2563eb; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(59,130,246,0.3); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid var(--bor2); color: var(--txt2);
+      padding: 11px 24px;
+      font-family: 'Syne', sans-serif;
+      font-size: .82rem; font-weight: 700; letter-spacing: .04em;
+      text-decoration: none;
+      background: transparent;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+      transition: all .25s;
+    }
+    .btn-outline:hover { border-color: var(--blue); color: var(--blue); }
+
+    /* STATS */
     .hero-stats {
-      display: flex; gap: 0;
-      margin-top: 2.4rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--bor);
+      background: var(--bg2);
     }
     .stat-item {
-      flex: 1;
-      text-align: center;
-      padding: 0 1rem;
-      border-right: 1px solid var(--border);
+      padding: 16px 18px;
+      border-right: 1px solid var(--bor);
+      position: relative;
     }
-    .stat-item:first-child { padding-left: 0; text-align: left; }
     .stat-item:last-child { border-right: none; }
     .stat-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.2rem;
-      color: var(--primary);
-      font-weight: 700;
-      line-height: 1;
-      display: block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.7rem; font-weight: 700;
+      color: var(--blue); line-height: 1;
+      display: block; margin-bottom: 4px;
     }
-    .stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 4px; font-weight: 500; }
+    .stat-label { font-size: .65rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--txt3); }
+    .stat-item::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--blue); transform: scaleX(0); transform-origin: left;
+      transition: transform .4s; transition-delay: var(--d, 0s);
+    }
+    .stat-item.visible::before { transform: scaleX(1); }
 
-    /* ─── HERO CARD (right) ─── */
+    /* HERO CARD */
     .hero-card {
-      background: var(--card);
-      border-radius: 22px;
-      padding: 2.4rem;
-      box-shadow: 0 30px 80px rgba(26,107,74,0.12), 0 2px 8px rgba(0,0,0,0.04);
-      border: 1px solid var(--border);
+      background: var(--bg2);
+      border: 1px solid var(--bor);
       position: relative;
       overflow: hidden;
     }
     .hero-card::before {
       content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--cyan), var(--purple));
     }
-    .card-avatar-row {
-      display: flex; align-items: center; gap: 1.2rem;
-      margin-bottom: 1.6rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid var(--border);
+    .hc-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--bor);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .hc-dots { display: flex; gap: 6px; }
+    .hc-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+    .hc-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .65rem; color: var(--txt3);
+      letter-spacing: .1em; text-transform: uppercase;
+    }
+
+    .avatar-row {
+      padding: 20px;
+      display: flex; align-items: center; gap: 14px;
+      border-bottom: 1px solid var(--bor);
     }
     .avatar {
-      width: 78px; height: 78px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      width: 64px; height: 64px; border-radius: 0;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--cyan) 100%);
       display: flex; align-items: center; justify-content: center;
-      font-family: 'Cormorant Garamond', serif;
-      color: #fff;
-      font-size: 2rem;
-      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      color: #fff; font-size: 1.3rem; font-weight: 700;
+      clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
       flex-shrink: 0;
-      box-shadow: 0 8px 20px rgba(26,107,74,0.35);
+      box-shadow: 0 0 30px rgba(59,130,246,0.25);
     }
-    .card-name-block { flex: 1; }
-    .card-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.55rem;
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.1;
+    .card-name { font-size: 1.15rem; font-weight: 800; color: var(--txt); }
+    .card-role { font-family: 'JetBrains Mono', monospace; font-size: .68rem; color: var(--blue); margin-top: 3px; }
+    .card-loc { font-size: .73rem; color: var(--txt3); margin-top: 4px; display: flex; align-items: center; gap: 5px; }
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: var(--green-dim); border: 1px solid #15803d55;
+      color: var(--green);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem; font-weight: 700; letter-spacing: .08em;
+      padding: 3px 9px; margin-top: 6px;
     }
-    .card-title {
-      font-size: 0.85rem;
-      color: var(--primary);
-      font-weight: 600;
-      margin-top: 4px;
-    }
-    .card-location {
-      font-size: 0.8rem;
-      color: var(--muted);
-      display: flex; align-items: center; gap: 5px;
-      margin-top: 5px;
-    }
-    .card-status {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(46,158,114,0.1);
-      border: 1px solid rgba(46,158,114,0.25);
-      color: var(--primary);
-      font-size: 0.73rem;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 50px;
-      margin-top: 7px;
-      letter-spacing: 0.4px;
-    }
-    .card-status span { width: 6px; height: 6px; background: #2e9e72; border-radius: 50%; animation: pulse 2s infinite; }
+    .status-badge span { width: 5px; height: 5px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); }
 
-    .info-row {
-      display: flex; align-items: center; gap: 12px;
-      padding: 11px 0;
-      border-bottom: 1px solid rgba(212,232,220,0.6);
-      font-size: 0.88rem;
-    }
-    .info-row:last-child { border-bottom: none; padding-bottom: 0; }
-    .info-icon {
-      width: 34px; height: 34px;
-      background: var(--primary-pale);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--primary);
-      font-size: 0.82rem;
-      flex-shrink: 0;
-    }
-    .info-label { font-size: 0.73rem; color: var(--muted); display: block; line-height: 1; margin-bottom: 2px; }
-    .info-val { color: var(--text); font-weight: 500; font-size: 0.87rem; }
-    .info-val a { color: var(--primary); text-decoration: none; }
-    .info-val a:hover { text-decoration: underline; }
-
-    .card-quick-skills {
-      margin-top: 1.4rem;
-      padding-top: 1.2rem;
-      border-top: 1px solid var(--border);
-    }
-    .quick-skills-label { font-size: 0.73rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 0.7rem; }
-    .quick-chips { display: flex; flex-wrap: wrap; gap: 6px; }
-    .qchip {
-      background: var(--primary-pale);
-      border: 1px solid var(--border);
-      color: var(--primary);
-      padding: 4px 11px;
-      border-radius: 5px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-
-    /* ─── SECTIONS ─── */
-    section { padding: 90px 6%; }
-    .container { max-width: 1200px; margin: auto; }
-    .section-tag {
-      font-size: 0.76rem;
-      font-weight: 700;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: var(--primary);
-      margin-bottom: 0.4rem;
-    }
-    .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem, 3.5vw, 2.8rem);
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.3px;
-      font-weight: 700;
-    }
-    .section-sub { color: var(--muted); max-width: 580px; margin-bottom: 3rem; font-size: 0.97rem; }
-
-    /* ─── ABOUT / SUMMARY ─── */
-    #about-summary { background: var(--card); }
-    .about-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
-    .summary-text { font-size: 0.97rem; color: var(--muted); line-height: 1.85; }
-    .summary-text p { margin-bottom: 1rem; }
-    .summary-text strong { color: var(--text); font-weight: 600; }
-    .proficiency-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-top: 1.5rem; }
-    .prof-item {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 0.83rem; color: var(--text); font-weight: 500;
-    }
-    .prof-item i { color: var(--primary); font-size: 0.75rem; }
-
-    .about-right { }
-    .highlight-box {
-      background: linear-gradient(135deg, var(--primary-pale), #fff);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.8rem;
-      margin-bottom: 1.2rem;
-    }
-    .highlight-box h4 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 0.8rem;
-      display: flex; align-items: center; gap: 8px;
-      color: var(--text);
-    }
-    .highlight-box h4 i { color: var(--primary); }
-    .highlight-box p { font-size: 0.87rem; color: var(--muted); line-height: 1.7; }
-    .cqrs-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.8rem; }
-    .cchip {
-      background: rgba(26,107,74,0.08);
-      border: 1px solid rgba(26,107,74,0.18);
-      color: var(--primary);
-      padding: 4px 11px;
-      border-radius: 50px;
-      font-size: 0.78rem;
-      font-weight: 600;
-    }
-
-    /* ─── VALUE ─── */
-    .value-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.4rem; }
-    .value-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.8rem;
-      transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-    .value-card::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--primary), var(--primary-light));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s;
-    }
-    .value-card:hover { transform: translateY(-5px); box-shadow: 0 18px 44px rgba(0,0,0,0.08); }
-    .value-card:hover::after { transform: scaleX(1); }
-    .value-icon { font-size: 1.6rem; margin-bottom: 1rem; color: var(--primary); }
-    .value-title { font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem; }
-    .value-desc { font-size: 0.86rem; color: var(--muted); line-height: 1.65; }
-
-    /* ─── SKILLS ─── */
-    #skills { background: var(--card); }
-    .skills-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: start; }
-    .skill-category { margin-bottom: 1.8rem; }
-    .skill-cat-title {
-      font-weight: 700; font-size: 0.8rem; letter-spacing: 1.2px;
-      text-transform: uppercase; color: var(--primary);
-      margin-bottom: 0.9rem;
-      display: flex; align-items: center; gap: 7px;
-    }
-    .skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
-    .tag {
-      background: var(--primary-pale);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 6px 14px;
-      border-radius: 6px;
-      font-size: 0.81rem;
-      font-weight: 500;
-      transition: all 0.2s;
-      cursor: default;
-    }
-    .tag:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
-    .tag.accent { background: var(--accent-pale); border-color: rgba(245,166,35,0.3); color: #a06800; }
-    .tag.accent:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
-
-    .tech-visual {
-      background: var(--primary-pale);
-      border-radius: 18px;
-      padding: 2rem;
-      border: 1px solid var(--border);
-    }
-    .tech-visual h4 { font-weight: 700; margin-bottom: 1.4rem; font-size: 0.95rem; color: var(--text); }
-    .tech-item {
+    .info-list { padding: 14px 20px; border-bottom: 1px solid var(--bor); }
+    .info-item {
       display: flex; align-items: center; gap: 12px;
       padding: 9px 0;
-      border-bottom: 1px solid rgba(212,232,220,0.7);
-      font-size: 0.85rem;
+      border-bottom: 1px solid rgba(30,39,54,0.6);
+      font-size: .82rem;
+    }
+    .info-item:last-child { border-bottom: none; }
+    .info-icon {
+      width: 28px; height: 28px;
+      background: var(--blue-dim); border: 1px solid var(--blue-glow);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue); font-size: .7rem; flex-shrink: 0;
+    }
+    .info-label { font-family: 'JetBrains Mono', monospace; font-size: .58rem; color: var(--txt3); letter-spacing: .08em; text-transform: uppercase; display: block; }
+    .info-val { color: var(--txt2); font-size: .78rem; }
+    .info-val a { color: var(--cyan); text-decoration: none; transition: color .2s; }
+    .info-val a:hover { color: var(--blue); }
+
+    .hc-skills { padding: 16px 20px; }
+    .hcs-label { font-family: 'JetBrains Mono', monospace; font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; color: var(--txt3); margin-bottom: 10px; }
+    .hcs-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .hcs-chip {
+      background: var(--bg3); border: 1px solid var(--bor2);
+      color: var(--txt2); padding: 4px 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .65rem; font-weight: 700;
+      transition: all .2s;
+    }
+    .hcs-chip:hover { border-color: var(--blue); color: var(--blue); }
+
+    /* ── SECTIONS ── */
+    section { padding: 90px 6%; }
+    .container { max-width: 1200px; margin: auto; }
+
+    .sec-tag {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: var(--blue-dim);
+      border: 1px solid var(--blue-glow);
+      padding: 3px 10px;
+      margin-bottom: 10px;
+    }
+    .sec-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 800; letter-spacing: -.03em;
+      color: var(--txt); margin-bottom: 6px;
+    }
+    .sec-sub { font-size: .9rem; color: var(--txt2); max-width: 560px; margin-bottom: 3rem; line-height: 1.7; }
+
+    /* ── ABOUT ── */
+    #about { background: var(--bg2); border-top: 1px solid var(--bor); border-bottom: 1px solid var(--bor); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+
+    .about-text { font-size: .9rem; color: var(--txt2); line-height: 1.9; }
+    .about-text p { margin-bottom: 1rem; }
+    .about-text strong { color: var(--txt); font-weight: 700; }
+
+    .proficiency-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 1.6rem; }
+    .prof-item {
+      display: flex; align-items: center; gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem; color: var(--txt2);
+      padding: 7px 10px;
+      background: var(--bg3); border: 1px solid var(--bor);
+      transition: all .2s;
+    }
+    .prof-item:hover { border-color: var(--blue); color: var(--txt); }
+    .prof-item i { color: var(--green); font-size: .6rem; }
+
+    .highlight-box {
+      background: var(--bg3); border: 1px solid var(--bor);
+      padding: 18px 20px; margin-bottom: 12px;
+      position: relative; overflow: hidden;
+    }
+    .highlight-box::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+      background: var(--blue);
+    }
+    .highlight-box h4 {
+      font-size: .82rem; font-weight: 700; color: var(--txt);
+      margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
+    }
+    .highlight-box h4 i { color: var(--blue); }
+    .highlight-box p { font-size: .78rem; color: var(--txt2); line-height: 1.7; }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+    .chip {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem; font-weight: 700; padding: 3px 8px;
+      background: var(--blue-dim); border: 1px solid var(--blue-glow);
+      color: var(--blue);
+    }
+    .chip.green { background: var(--green-dim); border-color: #15803d55; color: var(--green); }
+    .chip.amber { background: var(--amber-dim); border-color: #92400e55; color: var(--amber); }
+    .chip.purple { background: var(--purple-dim); border-color: #6b21a855; color: var(--purple); }
+
+    /* ── SERVICES ── */
+    #services { background: var(--bg); }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: var(--bor); border: 1px solid var(--bor); }
+    .service-card {
+      background: var(--bg2); padding: 28px 24px;
+      position: relative; overflow: hidden;
+      transition: background .25s;
+    }
+    .service-card:hover { background: var(--bg3); }
+    .service-card::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--blue); transform: scaleX(0); transform-origin: left;
+      transition: transform .3s;
+    }
+    .service-card:hover::after { transform: scaleX(1); }
+    .svc-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem; color: var(--txt3); letter-spacing: .12em;
+      text-transform: uppercase; margin-bottom: 14px;
+    }
+    .svc-icon {
+      width: 40px; height: 40px;
+      background: var(--blue-dim); border: 1px solid var(--blue-glow);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue); font-size: 1rem; margin-bottom: 14px;
+    }
+    .svc-title { font-size: .95rem; font-weight: 800; color: var(--txt); margin-bottom: 8px; }
+    .svc-desc { font-size: .8rem; color: var(--txt2); line-height: 1.7; }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--bg2); border-top: 1px solid var(--bor); border-bottom: 1px solid var(--bor); }
+    .skills-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .skill-cat { margin-bottom: 22px; }
+    .skill-cat-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--txt3);
+      margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+    }
+    .skill-cat-title i { color: var(--blue); }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      background: var(--bg3); border: 1px solid var(--bor);
+      color: var(--txt2); padding: 5px 12px;
+      font-family: 'JetBrains Mono', monospace; font-size: .68rem; font-weight: 500;
+      transition: all .2s; cursor: default;
+    }
+    .tag:hover { background: var(--blue-dim); border-color: var(--blue-glow); color: var(--blue); }
+    .tag.accent { background: var(--purple-dim); border-color: #6b21a855; color: var(--purple); }
+    .tag.accent:hover { background: var(--purple-dim); border-color: var(--purple); }
+
+    /* PROFICIENCY BARS */
+    .tech-visual { }
+    .tech-visual h4 { font-size: .82rem; font-weight: 700; color: var(--txt2); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 16px; }
+    .tech-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--bor);
+      font-size: .8rem;
     }
     .tech-item:last-child { border-bottom: none; }
-    .tech-item i { width: 18px; color: var(--primary); font-size: 0.9rem; }
-    .tech-name { min-width: 130px; font-weight: 500; }
-    .tech-bar-wrap { flex: 1; height: 5px; background: #d0e8da; border-radius: 3px; overflow: hidden; }
-    .tech-bar { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--primary), var(--primary-light)); transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
-    .tech-pct { font-size: 0.73rem; color: var(--muted); font-weight: 600; min-width: 32px; text-align: right; }
+    .tech-item i { width: 16px; color: var(--blue); font-size: .85rem; flex-shrink: 0; }
+    .tech-name { min-width: 140px; font-family: 'JetBrains Mono', monospace; font-size: .72rem; color: var(--txt2); }
+    .tech-bar-wrap { flex: 1; height: 3px; background: var(--bor2); position: relative; overflow: hidden; }
+    .tech-bar { height: 100%; background: linear-gradient(90deg, var(--blue), var(--cyan)); transition: width 1.4s cubic-bezier(0.4,0,0.2,1); }
+    .tech-pct { font-family: 'JetBrains Mono', monospace; font-size: .62rem; color: var(--blue); min-width: 30px; text-align: right; }
 
-    /* ─── EXPERIENCE ─── */
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--bg); }
     .timeline { position: relative; padding-left: 0; }
     .timeline::before {
       content: ''; position: absolute;
-      left: 21px; top: 8px; bottom: 0;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--primary) 0%, var(--border) 100%);
+      left: 15px; top: 8px; bottom: 0; width: 1px;
+      background: linear-gradient(to bottom, var(--blue) 0%, var(--bor) 100%);
     }
-    .timeline-item { padding-left: 58px; margin-bottom: 2.2rem; position: relative; }
-    .timeline-dot {
-      position: absolute; left: 11px; top: 6px;
-      width: 22px; height: 22px; border-radius: 50%;
-      background: var(--card);
-      border: 3px solid var(--border);
-      z-index: 1;
+    .tl-item { padding-left: 48px; margin-bottom: 28px; position: relative; }
+    .tl-dot {
+      position: absolute; left: 7px; top: 8px;
+      width: 18px; height: 18px;
+      background: var(--bg3); border: 2px solid var(--bor2);
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
     }
-    .timeline-dot.active {
-      background: var(--primary);
-      border-color: var(--primary);
-      box-shadow: 0 0 0 5px rgba(26,107,74,0.15);
+    .tl-dot.active {
+      background: var(--blue); border-color: var(--blue);
+      box-shadow: 0 0 16px rgba(59,130,246,0.5);
     }
-    .timeline-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1.6rem;
-      transition: box-shadow 0.25s;
+    .tl-card {
+      background: var(--bg2); border: 1px solid var(--bor);
+      padding: 22px; transition: border-color .25s;
+      position: relative; overflow: hidden;
     }
-    .timeline-card:hover { box-shadow: 0 10px 32px rgba(0,0,0,0.07); }
-    .tl-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
-    .tl-title { font-weight: 700; font-size: 1.05rem; color: var(--text); }
-    .tl-company { color: var(--primary); font-size: 0.87rem; font-weight: 600; margin-top: 3px; display: flex; align-items: center; gap: 6px; }
+    .tl-card::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+      background: var(--blue); transform: scaleY(0); transform-origin: top;
+      transition: transform .3s;
+    }
+    .tl-card:hover { border-color: var(--bor2); }
+    .tl-card:hover::before { transform: scaleY(1); }
+
+    .tl-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 6px; }
+    .tl-title { font-size: 1rem; font-weight: 800; color: var(--txt); }
+    .tl-company { font-family: 'JetBrains Mono', monospace; font-size: .7rem; color: var(--blue); margin-top: 4px; display: flex; align-items: center; gap: 6px; }
     .tl-date {
-      background: rgba(26,107,74,0.1);
-      color: var(--primary);
-      padding: 4px 14px;
-      border-radius: 50px;
-      font-size: 0.76rem;
-      font-weight: 700;
-      white-space: nowrap;
-      letter-spacing: 0.3px;
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--blue-dim); border: 1px solid var(--blue-glow);
+      color: var(--blue); padding: 3px 12px;
+      font-size: .65rem; font-weight: 700;
+      white-space: nowrap; letter-spacing: .04em;
     }
-    .tl-desc { color: var(--muted); font-size: 0.87rem; margin: 0.7rem 0; line-height: 1.7; }
-    .resp-list { list-style: none; margin-top: 0.8rem; }
+    .tl-desc { color: var(--txt2); font-size: .83rem; margin: 10px 0; line-height: 1.75; }
+    .resp-list { list-style: none; margin-top: 10px; }
     .resp-list li {
       display: flex; align-items: flex-start; gap: 8px;
-      font-size: 0.86rem; color: var(--text);
-      margin-bottom: 0.45rem; line-height: 1.55;
+      font-size: .8rem; color: var(--txt2);
+      margin-bottom: 6px; line-height: 1.6;
     }
-    .resp-list li::before { content: '›'; color: var(--primary); font-size: 1.1rem; line-height: 1.3; flex-shrink: 0; font-weight: 700; }
-    .tech-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1rem; }
+    .resp-list li::before {
+      content: '▹'; color: var(--blue); flex-shrink: 0;
+      font-size: .75rem; line-height: 1.6;
+    }
+    .tech-pills { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 14px; }
     .tpill {
-      background: var(--primary-pale);
-      color: var(--primary);
-      padding: 3px 10px;
-      border-radius: 4px;
-      font-size: 0.75rem;
-      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg3); border: 1px solid var(--bor2);
+      color: var(--cyan); padding: 3px 9px;
+      font-size: .62rem; font-weight: 700;
     }
 
-    /* ─── PROJECTS ─── */
-    #projects { background: linear-gradient(180deg, var(--primary-pale) 0%, var(--bg) 100%); }
-    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 1.4rem; }
-    .project-card {
-      background: var(--card);
-      border-radius: 18px;
-      padding: 2rem;
-      border: 1px solid var(--border);
-      transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
+    /* ── PROJECTS ── */
+    #projects { background: var(--bg2); border-top: 1px solid var(--bor); border-bottom: 1px solid var(--bor); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1px; background: var(--bor); border: 1px solid var(--bor); }
+    .proj-card {
+      background: var(--bg2); padding: 24px;
+      position: relative; overflow: hidden; display: flex; flex-direction: column;
+      transition: background .25s;
     }
-    .project-card:hover { transform: translateY(-6px); box-shadow: 0 24px 56px rgba(26,107,74,0.12); }
+    .proj-card:hover { background: var(--bg3); }
+    .proj-card:hover .proj-num { color: rgba(59,130,246,0.15); }
     .proj-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3.5rem; color: rgba(26,107,74,0.06);
-      font-weight: 800; position: absolute;
-      top: 0.8rem; right: 1.4rem; line-height: 1;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 4rem; font-weight: 800;
+      color: rgba(255,255,255,0.03);
+      position: absolute; top: 8px; right: 16px;
+      line-height: 1; transition: color .3s;
       pointer-events: none;
     }
     .proj-icon {
-      width: 46px; height: 46px;
-      background: rgba(26,107,74,0.1);
-      border-radius: 12px;
+      width: 38px; height: 38px;
+      background: var(--blue-dim); border: 1px solid var(--blue-glow);
       display: flex; align-items: center; justify-content: center;
-      color: var(--primary); font-size: 1.2rem;
-      margin-bottom: 1rem;
-      flex-shrink: 0;
+      color: var(--blue); font-size: .9rem; margin-bottom: 14px; flex-shrink: 0;
     }
-    .proj-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 0.35rem; color: var(--text); }
-    .proj-domain {
-      font-size: 0.76rem; color: var(--muted);
-      margin-bottom: 0.8rem;
-      display: flex; align-items: center; gap: 5px;
-      font-weight: 500;
-    }
-    .proj-pills { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 1rem; }
+    .proj-title { font-size: .95rem; font-weight: 800; color: var(--txt); margin-bottom: 4px; }
+    .proj-domain { font-family: 'JetBrains Mono', monospace; font-size: .62rem; color: var(--txt3); margin-bottom: 10px; display: flex; align-items: center; gap: 5px; letter-spacing: .06em; text-transform: uppercase; }
+    .proj-pills { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 12px; }
     .ppill {
-      background: var(--primary-pale);
-      color: var(--primary);
-      border: 1px solid var(--border);
-      padding: 3px 9px;
-      border-radius: 4px;
-      font-size: 0.73rem;
-      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg3); border: 1px solid var(--bor2);
+      color: var(--txt3); padding: 2px 8px; font-size: .6rem; font-weight: 700;
     }
-    .proj-desc { font-size: 0.86rem; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; flex: 1; }
-    .proj-resp h5 {
-      font-size: 0.73rem; text-transform: uppercase;
-      letter-spacing: 1.2px; color: var(--primary);
-      margin-bottom: 0.55rem; font-weight: 700;
-    }
+    .proj-desc { font-size: .8rem; color: var(--txt2); line-height: 1.7; margin-bottom: 14px; flex: 1; }
+    .proj-resp h5 { font-family: 'JetBrains Mono', monospace; font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; font-weight: 700; }
 
-    /* ─── EDUCATION ─── */
-    .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.2rem; }
+    /* ── EDUCATION ── */
+    #education { background: var(--bg); }
+    .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: var(--bor); border: 1px solid var(--bor); }
     .edu-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1.6rem;
-      display: flex; gap: 1rem; align-items: flex-start;
-      transition: box-shadow 0.2s;
+      background: var(--bg2); padding: 22px; display: flex; gap: 16px;
+      transition: background .25s;
     }
-    .edu-card:hover { box-shadow: 0 8px 26px rgba(0,0,0,0.06); }
+    .edu-card:hover { background: var(--bg3); }
     .edu-icon {
-      width: 46px; height: 46px; flex-shrink: 0;
-      background: var(--primary-pale);
-      border-radius: 12px;
+      width: 42px; height: 42px; flex-shrink: 0;
+      background: var(--bg3); border: 1px solid var(--bor2);
       display: flex; align-items: center; justify-content: center;
-      color: var(--primary); font-size: 1.1rem;
+      color: var(--blue); font-size: 1rem;
     }
-    .edu-degree { font-weight: 700; font-size: 0.95rem; color: var(--text); }
-    .edu-school { color: var(--muted); font-size: 0.82rem; margin: 3px 0; }
-    .edu-meta { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+    .edu-degree { font-size: .88rem; font-weight: 800; color: var(--txt); }
+    .edu-school { font-family: 'JetBrains Mono', monospace; font-size: .65rem; color: var(--txt3); margin: 4px 0; }
+    .edu-meta { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
     .ebadge {
-      font-size: 0.73rem; padding: 3px 10px;
-      border-radius: 50px; font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem; font-weight: 700; padding: 2px 8px;
     }
-    .ebadge.green { background: rgba(26,107,74,0.1); color: var(--primary); }
-    .ebadge.gold { background: var(--accent-pale); color: #9a6200; border: 1px solid rgba(245,166,35,0.3); }
+    .ebadge.blue { background: var(--blue-dim); border: 1px solid var(--blue-glow); color: var(--blue); }
+    .ebadge.amber { background: var(--amber-dim); border: 1px solid #92400e55; color: var(--amber); }
 
-    /* ─── CONTACT ─── */
-    #contact { background: var(--card); }
-    .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4.5rem; align-items: center; }
-    .contact-heading {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.2rem; font-weight: 700;
-      margin-bottom: 0.9rem; line-height: 1.15;
-    }
-    .contact-heading em { font-style: italic; color: var(--primary); }
-    .contact-intro { color: var(--muted); font-size: 0.95rem; margin-bottom: 1.8rem; line-height: 1.75; }
-    .contact-links { display: flex; flex-direction: column; gap: 0.9rem; }
+    /* ── CONTACT ── */
+    #contact { background: var(--bg2); border-top: 1px solid var(--bor); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .contact-heading { font-size: 2rem; font-weight: 800; letter-spacing: -.03em; color: var(--txt); margin-bottom: .8rem; line-height: 1.15; }
+    .contact-heading span { color: var(--blue); }
+    .contact-intro { font-size: .88rem; color: var(--txt2); line-height: 1.8; margin-bottom: 1.8rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 8px; }
     .clink {
       display: flex; align-items: center; gap: 14px;
-      padding: 14px 18px;
-      background: var(--primary-pale);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      text-decoration: none;
-      color: var(--text);
-      font-size: 0.88rem;
-      font-weight: 500;
-      transition: all 0.22s;
+      padding: 13px 16px;
+      background: var(--bg3); border: 1px solid var(--bor);
+      text-decoration: none; color: var(--txt2);
+      font-size: .82rem; font-weight: 600;
+      transition: all .22s; position: relative; overflow: hidden;
     }
-    .clink:hover { border-color: var(--primary); color: var(--primary); transform: translateX(5px); background: rgba(26,107,74,0.07); }
-    .clink i { color: var(--primary); width: 20px; text-align: center; font-size: 1rem; }
-    .clink-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); display: block; }
-    .clink-val { font-weight: 600; }
+    .clink::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--blue); transform: scaleY(0); transform-origin: top; transition: transform .25s; }
+    .clink:hover { border-color: var(--bor2); color: var(--txt); background: var(--bg2); transform: translateX(4px); }
+    .clink:hover::before { transform: scaleY(1); }
+    .clink i { color: var(--blue); width: 18px; text-align: center; flex-shrink: 0; }
+    .clink-label { font-family: 'JetBrains Mono', monospace; font-size: .6rem; text-transform: uppercase; letter-spacing: .1em; color: var(--txt3); display: block; }
+    .clink-val { font-size: .8rem; font-weight: 700; color: var(--txt); }
 
+    /* HIRE BOX */
     .hire-box {
-      background: linear-gradient(145deg, var(--primary) 0%, #145538 100%);
-      border-radius: 22px;
-      padding: 3rem 2.5rem;
-      color: #fff;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
+      background: var(--bg3); border: 1px solid var(--bor);
+      padding: 40px 32px; text-align: center; position: relative; overflow: hidden;
     }
     .hire-box::before {
-      content: '';
-      position: absolute;
-      width: 300px; height: 300px; border-radius: 50%;
-      background: rgba(255,255,255,0.04);
-      top: -100px; right: -80px;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--cyan), var(--purple));
     }
-    .hire-box i.big { font-size: 2.8rem; margin-bottom: 1.2rem; opacity: 0.88; display: block; }
-    .hire-box h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.8rem; margin-bottom: 0.9rem; font-weight: 700;
+    .hire-glow {
+      position: absolute; width: 300px; height: 300px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 65%);
+      top: -100px; left: 50%; transform: translateX(-50%);
+      pointer-events: none;
     }
-    .hire-box p { opacity: 0.82; font-size: 0.9rem; margin-bottom: 2rem; line-height: 1.75; }
+    .hire-box i.big { font-size: 2.4rem; color: var(--blue); margin-bottom: 1.2rem; display: block; }
+    .hire-box h3 { font-size: 1.5rem; font-weight: 800; color: var(--txt); margin-bottom: .8rem; }
+    .hire-box p { font-size: .82rem; color: var(--txt2); line-height: 1.75; margin-bottom: 1.8rem; }
     .hire-btn {
       display: inline-flex; align-items: center; gap: 8px;
-      background: #fff;
-      color: var(--primary);
-      padding: 13px 30px;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 0.9rem;
+      background: var(--blue); color: #fff;
+      padding: 12px 28px;
+      font-family: 'Syne', sans-serif;
+      font-size: .82rem; font-weight: 700; letter-spacing: .04em;
       text-decoration: none;
-      transition: all 0.25s;
-      letter-spacing: 0.2px;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+      transition: all .25s;
     }
-    .hire-btn:hover { background: var(--accent); color: #fff; transform: scale(1.04); }
-    .hire-note { margin-top: 1.4rem; font-size: 0.78rem; opacity: 0.6; }
+    .hire-btn:hover { background: #2563eb; box-shadow: 0 0 30px rgba(59,130,246,0.4); }
+    .hire-note { margin-top: 16px; font-family: 'JetBrains Mono', monospace; font-size: .62rem; color: var(--txt3); }
 
-    /* ─── FOOTER ─── */
+    /* ── FOOTER ── */
     footer {
-      background: #111e16;
-      color: rgba(255,255,255,0.45);
-      text-align: center;
-      padding: 2.2rem;
-      font-size: 0.83rem;
+      background: var(--bg); border-top: 1px solid var(--bor);
+      text-align: center; padding: 24px;
+      font-family: 'JetBrains Mono', monospace; font-size: .68rem; color: var(--txt3);
     }
-    footer span { color: var(--primary-light); }
+    footer span { color: var(--blue); }
 
-    /* ─── ANIMATION ─── */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
+    /* ── FADE ANIMATIONS ── */
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 900px) {
+    /* ── DIVIDER ── */
+    .divider { height: 1px; background: var(--bor); margin: 28px 0; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
       .hero-inner { grid-template-columns: 1fr; }
-      .about-layout { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
       .skills-layout { grid-template-columns: 1fr; }
-      .contact-layout { grid-template-columns: 1fr; }
-      .hero-stats { gap: 0; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 640px) {
       .nav-links { display: none; }
-      .hero h1 { font-size: 2.4rem; }
+      section { padding: 60px 5%; }
     }
   </style>
 </head>
@@ -681,9 +669,9 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Manoj Pant</div>
+  <div class="nav-brand">Manoj<span>.</span>Pant</div>
   <ul class="nav-links">
-    <li><a href="#about-summary">About</a></li>
+    <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
@@ -693,146 +681,170 @@
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <div class="hero-blob1"></div>
-  <div class="hero-blob2"></div>
+  <div class="hero-orb1"></div>
+  <div class="hero-orb2"></div>
   <div class="hero-inner">
 
-    <!-- Left -->
+    <!-- LEFT -->
     <div class="fade-up">
-      <div class="hero-badge">
-        <span class="pulse-dot"></span> Available for Freelance Projects 
+      <div class="hero-tag">
+        <span class="pulse-dot"></span>
+        Open to Freelance Opportunities
       </div>
-      <h1>Full Stack <em>.NET</em> Developer &amp; Freelancer</h1>
-      <p class="hero-summary">
+      <h1>
+        Full Stack<br>
+        <span class="accent">.NET</span> Developer<br>
+        <span class="dim">&amp; Freelancer</span>
+      </h1>
+
+      <div class="hero-mono">
+        <span class="key">role</span> : <span class="str">"Junior Software Engineer"</span><br>
+        <span class="key">stack</span> : <span class="val">[Blazor, ASP.NET Core, Web API, Docker]</span><br>
+        <span class="key">location</span> : <span class="str">"Delhi, India"</span><br>
+        <span class="key">status</span> : <span class="str" style="color:var(--green)">"Available for Projects"</span>
+      </div>
+
+      <p class="hero-desc">
         <strong>Passionate about building secure, scalable web applications</strong> using the latest .NET technologies.
-        From clean architecture to real-time deployment — I deliver end-to-end solutions with security-first practices,
-        CQRS patterns, and pixel-perfect results.
+        From clean architecture to real-time deployment — I deliver end-to-end solutions with
+        security-first practices, CQRS patterns, and pixel-perfect results.
       </p>
-      <div class="hero-ctas">
+
+      <div class="hero-btns">
         <a href="#projects" class="btn-primary"><i class="fas fa-rocket"></i> View Projects</a>
         <a href="#contact" class="btn-outline"><i class="fas fa-paper-plane"></i> Hire Me</a>
       </div>
+
       <div class="hero-stats">
-        <div class="stat-item">
+        <div class="stat-item" style="--d:0s">
           <span class="stat-num">3+</span>
-          <div class="stat-label">Year Experience</div>
+          <div class="stat-label">Yrs Experience</div>
         </div>
-        <div class="stat-item">
+        <div class="stat-item" style="--d:.1s">
           <span class="stat-num">30+</span>
-          <div class="stat-label">Projects Delivered</div>
+          <div class="stat-label">Projects Done</div>
         </div>
-        <div class="stat-item">
-          <span class="stat-num">.NET 10</span>
+        <div class="stat-item" style="--d:.2s">
+          <span class="stat-num">.NET 8</span>
           <div class="stat-label">Latest Stack</div>
         </div>
-        <div class="stat-item">
+        <div class="stat-item" style="--d:.3s">
           <span class="stat-num">100%</span>
-          <div class="stat-label">Client Satisfaction</div>
+          <div class="stat-label">Satisfaction</div>
         </div>
       </div>
     </div>
 
-    <!-- Right Card -->
-    <div class="hero-card fade-up" style="transition-delay:0.18s">
-      <div class="card-avatar-row">
+    <!-- RIGHT CARD -->
+    <div class="hero-card fade-up" style="transition-delay:.18s">
+      <div class="hc-header">
+        <div class="hc-dots">
+          <div class="hc-dot" style="background:#ef4444"></div>
+          <div class="hc-dot" style="background:#f59e0b"></div>
+          <div class="hc-dot" style="background:#22c55e"></div>
+        </div>
+        <div class="hc-title">dev-profile.json</div>
+      </div>
+
+      <div class="avatar-row">
         <div class="avatar">MP</div>
-        <div class="card-name-block">
+        <div>
           <div class="card-name">Manoj Pant</div>
-          <div class="card-title">Full Stack .NET Developer</div>
-          <div class="card-location"><i class="fas fa-map-marker-alt"></i> Delhi, India</div>
-          <div class="card-status"><span></span> Available for Projects</div>
+          <div class="card-role">// Full Stack .NET Developer</div>
+          <div class="card-loc"><i class="fas fa-map-marker-alt" style="color:var(--blue)"></i> Delhi, India</div>
+          <div class="status-badge"><span></span> AVAILABLE FOR PROJECTS</div>
         </div>
       </div>
 
-      <div class="info-row">
-        <div class="info-icon"><i class="fas fa-envelope"></i></div>
-        <div>
-          <span class="info-label">Email</span>
-          <div class="info-val"><a href="mailto:pantmanoj2005@gmail.com">pantmanoj2005@gmail.com</a></div>
+      <div class="info-list">
+        <div class="info-item">
+          <div class="info-icon"><i class="fas fa-envelope"></i></div>
+          <div>
+            <span class="info-label">Email</span>
+            <div class="info-val"><a href="mailto:pantmanoj2005@gmail.com">pantmanoj2005@gmail.com</a></div>
+          </div>
         </div>
-      </div>
-      <div class="info-row">
-        <div class="info-icon"><i class="fas fa-phone"></i></div>
-        <div>
-          <span class="info-label">Phone</span>
-          <div class="info-val"><a href="tel:+919258029267">+91 9258029267</a></div>
+        <div class="info-item">
+          <div class="info-icon"><i class="fas fa-phone"></i></div>
+          <div>
+            <span class="info-label">Phone</span>
+            <div class="info-val"><a href="tel:+919258029267">+91 9258029267</a></div>
+          </div>
         </div>
-      </div>
-      <div class="info-row">
-        <div class="info-icon"><i class="fab fa-linkedin"></i></div>
-        <div>
-          <span class="info-label">LinkedIn</span>
-          <div class="info-val"><a href="https://www.linkedin.com/in/manoj-pant-90628824b/" target="_blank">manoj-pant-90628824b</a></div>
+        <div class="info-item">
+          <div class="info-icon"><i class="fab fa-linkedin"></i></div>
+          <div>
+            <span class="info-label">LinkedIn</span>
+            <div class="info-val"><a href="https://www.linkedin.com/in/manoj-pant-90628824b/" target="_blank">manoj-pant-90628824b</a></div>
+          </div>
         </div>
-      </div>
-      <div class="info-row">
-        <div class="info-icon"><i class="fab fa-github"></i></div>
-        <div>
-          <span class="info-label">GitHub</span>
-          <div class="info-val"><a href="https://github.com/ManojPant2005" target="_blank">ManojPant2005</a></div>
+        <div class="info-item">
+          <div class="info-icon"><i class="fab fa-github"></i></div>
+          <div>
+            <span class="info-label">GitHub</span>
+            <div class="info-val"><a href="https://github.com/ManojPant2005" target="_blank">ManojPant2005</a></div>
+          </div>
         </div>
       </div>
 
-      <div class="card-quick-skills">
-        <div class="quick-skills-label">Core Technologies</div>
-        <div class="quick-chips">
-          <span class="qchip">Blazor</span>
-          <span class="qchip">ASP.NET Core</span>
-          <span class="qchip">Web API</span>
-          <span class="qchip">EF Core</span>
-          <span class="qchip">SQL Server</span>
-          <span class="qchip">Docker</span>
+      <div class="hc-skills">
+        <div class="hcs-label">// Core Technologies</div>
+        <div class="hcs-chips">
+          <span class="hcs-chip">Blazor</span>
+          <span class="hcs-chip">ASP.NET Core</span>
+          <span class="hcs-chip">Web API</span>
+          <span class="hcs-chip">EF Core</span>
+          <span class="hcs-chip">SQL Server</span>
+          <span class="hcs-chip">Docker</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ABOUT / SUMMARY -->
-<section id="about-summary">
+<!-- ABOUT -->
+<section id="about">
   <div class="container">
-    <p class="section-tag fade-up">My Profile</p>
-    <h2 class="section-title fade-up">Who I Am</h2>
-    <div class="about-layout">
+    <div class="sec-tag fade-up">01 — Professional Profile</div>
+    <h2 class="sec-title fade-up">Who I Am</h2>
+    <div class="about-grid">
       <div class="fade-up">
-        <div class="summary-text">
+        <div class="about-text">
           <p>I am a <strong>passionate Full-Stack .NET Developer</strong> with a focus on building secure and scalable web applications. Experienced in developing end-to-end solutions using modern .NET technologies and following clean coding practices.</p>
           <p>Skilled in implementing the <strong>CQRS pattern</strong>, managing projects from start to deployment, and collaborating effectively within teams to deliver real-world, production-grade applications.</p>
           <p>I have completed <strong>30+ projects</strong> during my internship and professional career, focusing on creating efficient, user-friendly, and maintainable web applications. Always eager to learn, improve, and contribute to impactful software development.</p>
         </div>
-        <div style="margin-top:1.6rem">
-          <div class="quick-skills-label" style="margin-bottom:0.9rem; font-size:0.76rem; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--muted)">Proficient In</div>
-          <div class="proficiency-grid">
-            <div class="prof-item"><i class="fas fa-check-circle"></i> C# · .NET Core · MVC</div>
-            <div class="prof-item"><i class="fas fa-check-circle"></i> Blazor · WinForms · MAUI</div>
-            <div class="prof-item"><i class="fas fa-check-circle"></i> SQL · T-SQL · Oracle PL/SQL</div>
-            <div class="prof-item"><i class="fas fa-check-circle"></i> EF Core · ADO.NET</div>
-            <div class="prof-item"><i class="fas fa-check-circle"></i> Web APIs · Windows Services</div>
-            <div class="prof-item"><i class="fas fa-check-circle"></i> JavaScript · Bootstrap</div>
-            <div class="prof-item"><i class="fas fa-check-circle"></i> Docker · Microservices</div>
-            <div class="prof-item"><i class="fas fa-check-circle"></i> Git · Agile Practices</div>
-          </div>
+        <div style="margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--txt3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">// Proficient In</div>
+        <div class="proficiency-grid">
+          <div class="prof-item"><i class="fas fa-check"></i> C# · .NET Core · MVC</div>
+          <div class="prof-item"><i class="fas fa-check"></i> Blazor · WinForms · MAUI</div>
+          <div class="prof-item"><i class="fas fa-check"></i> SQL · T-SQL · Oracle PL/SQL</div>
+          <div class="prof-item"><i class="fas fa-check"></i> EF Core · ADO.NET</div>
+          <div class="prof-item"><i class="fas fa-check"></i> Web APIs · Windows Services</div>
+          <div class="prof-item"><i class="fas fa-check"></i> JavaScript · Bootstrap</div>
+          <div class="prof-item"><i class="fas fa-check"></i> Docker · Microservices</div>
+          <div class="prof-item"><i class="fas fa-check"></i> Git · Agile Practices</div>
         </div>
       </div>
-      <div class="fade-up" style="transition-delay:0.12s">
+      <div class="fade-up" style="transition-delay:.12s">
         <div class="highlight-box">
           <h4><i class="fas fa-sitemap"></i> Architecture &amp; Patterns</h4>
           <p>I design systems with maintainability in mind — applying industry-standard patterns that make codebases easy to extend and scale over time.</p>
-          <div class="cqrs-chips">
-            <span class="cchip">CQRS Pattern</span>
-            <span class="cchip">Clean Architecture</span>
-            <span class="cchip">SOLID Principles</span>
-            <span class="cchip">Microservices</span>
-            <span class="cchip">Repository Pattern</span>
-            <span class="cchip">Design Patterns</span>
+          <div class="chip-row">
+            <span class="chip">CQRS Pattern</span>
+            <span class="chip">Clean Architecture</span>
+            <span class="chip">SOLID Principles</span>
+            <span class="chip">Microservices</span>
+            <span class="chip">Repository Pattern</span>
+            <span class="chip">Design Patterns</span>
           </div>
         </div>
-        <div class="highlight-box">
-          <h4><i class="fas fa-shield-halved"></i> Security &amp; Best Practices</h4>
-          <p>Every application I build is secured end-to-end — from JWT authentication and role-based access control to input validation, SQL injection prevention, and OWASP compliance.</p>
+        <div class="highlight-box" style="--left-color:var(--cyan)">
+          <h4 style=""><i class="fas fa-shield-halved" style="color:var(--cyan)"></i> Security &amp; Best Practices</h4>
+          <p>Every application I build is secured end-to-end — JWT authentication, role-based access control, input validation, SQL injection prevention, and OWASP compliance built into every layer.</p>
         </div>
         <div class="highlight-box">
-          <h4><i class="fas fa-users-gear"></i> Internship — Rapid IT Solutions</h4>
+          <h4><i class="fas fa-users-gear" style="color:var(--green)"></i> Internship — Rapid IT Solutions</h4>
           <p>Completed a 6-month hands-on internship focused on modern .NET technologies. Worked with Blazor, Web APIs, EF Core, and Microservices architecture following Agile practices with code reviews and version control.</p>
         </div>
       </div>
@@ -840,42 +852,48 @@
   </div>
 </section>
 
-<!-- FREELANCE VALUE -->
-<section id="services" style="background:var(--bg)">
+<!-- SERVICES -->
+<section id="services">
   <div class="container">
-    <p class="section-tag fade-up">What I Offer</p>
-    <h2 class="section-title fade-up">Freelance Services</h2>
-    <p class="section-sub fade-up">End-to-end application delivery — from requirement gathering to production deployment — with quality and security guaranteed.</p>
-    <div class="value-grid">
-      <div class="value-card fade-up">
-        <div class="value-icon"><i class="fas fa-fire-flame-curved"></i></div>
-        <div class="value-title">Blazor Web Applications</div>
-        <div class="value-desc">Full-stack Blazor Server and WebAssembly apps with rich UI components, real-time features, and seamless API integration.</div>
+    <div class="sec-tag fade-up">02 — What I Offer</div>
+    <h2 class="sec-title fade-up">Freelance Services</h2>
+    <p class="sec-sub fade-up">End-to-end application delivery — from requirement gathering to production deployment — with quality and security guaranteed.</p>
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <div class="svc-num">01 / 06</div>
+        <div class="svc-icon"><i class="fas fa-fire-flame-curved"></i></div>
+        <div class="svc-title">Blazor Web Applications</div>
+        <div class="svc-desc">Full-stack Blazor Server and WebAssembly apps with rich UI components, real-time features, and seamless API integration.</div>
       </div>
-      <div class="value-card fade-up" style="transition-delay:0.08s">
-        <div class="value-icon"><i class="fas fa-plug-circle-bolt"></i></div>
-        <div class="value-title">ASP.NET Core &amp; Web API</div>
-        <div class="value-desc">RESTful APIs with Minimal API support, Swagger/OpenAPI documentation, JWT auth, and complete backend integration.</div>
+      <div class="service-card fade-up" style="transition-delay:.07s">
+        <div class="svc-num">02 / 06</div>
+        <div class="svc-icon"><i class="fas fa-plug-circle-bolt"></i></div>
+        <div class="svc-title">ASP.NET Core &amp; Web API</div>
+        <div class="svc-desc">RESTful APIs with Minimal API support, Swagger/OpenAPI documentation, JWT auth, and complete backend integration.</div>
       </div>
-      <div class="value-card fade-up" style="transition-delay:0.16s">
-        <div class="value-icon"><i class="fas fa-shield-halved"></i></div>
-        <div class="value-title">Security-First Development</div>
-        <div class="value-desc">OWASP compliance, JWT tokens, role-based access, SQL injection prevention, and input sanitisation built into every layer.</div>
+      <div class="service-card fade-up" style="transition-delay:.14s">
+        <div class="svc-num">03 / 06</div>
+        <div class="svc-icon"><i class="fas fa-shield-halved"></i></div>
+        <div class="svc-title">Security-First Development</div>
+        <div class="svc-desc">OWASP compliance, JWT tokens, role-based access, SQL injection prevention, and input sanitisation built into every layer.</div>
       </div>
-      <div class="value-card fade-up" style="transition-delay:0.08s">
-        <div class="value-icon"><i class="fas fa-layer-group"></i></div>
-        <div class="value-title">Clean Architecture &amp; CQRS</div>
-        <div class="value-desc">SOLID principles, CQRS pattern, separation of concerns — scalable and maintainable codebases designed to last.</div>
+      <div class="service-card fade-up" style="transition-delay:.07s">
+        <div class="svc-num">04 / 06</div>
+        <div class="svc-icon"><i class="fas fa-layer-group"></i></div>
+        <div class="svc-title">Clean Architecture &amp; CQRS</div>
+        <div class="svc-desc">SOLID principles, CQRS pattern, separation of concerns — scalable and maintainable codebases designed to last.</div>
       </div>
-      <div class="value-card fade-up" style="transition-delay:0.16s">
-        <div class="value-icon"><i class="fas fa-database"></i></div>
-        <div class="value-title">Database Design &amp; Optimisation</div>
-        <div class="value-desc">Complex stored procedures, EF Core migrations, query optimisation across MS SQL, Oracle, and MySQL.</div>
+      <div class="service-card fade-up" style="transition-delay:.14s">
+        <div class="svc-num">05 / 06</div>
+        <div class="svc-icon"><i class="fas fa-database"></i></div>
+        <div class="svc-title">Database Design &amp; Optimisation</div>
+        <div class="svc-desc">Complex stored procedures, EF Core migrations, query optimisation across MS SQL, Oracle, and MySQL.</div>
       </div>
-      <div class="value-card fade-up" style="transition-delay:0.24s">
-        <div class="value-icon"><i class="fas fa-server"></i></div>
-        <div class="value-title">Windows Services &amp; Background Jobs</div>
-        <div class="value-desc">Scheduled background processing, data archiving, automated event monitoring with error recovery and zero-downtime operation.</div>
+      <div class="service-card fade-up" style="transition-delay:.21s">
+        <div class="svc-num">06 / 06</div>
+        <div class="svc-icon"><i class="fas fa-server"></i></div>
+        <div class="svc-title">Windows Services &amp; Background Jobs</div>
+        <div class="svc-desc">Scheduled background processing, data archiving, automated event monitoring with error recovery and zero-downtime operation.</div>
       </div>
     </div>
   </div>
@@ -884,36 +902,36 @@
 <!-- SKILLS -->
 <section id="skills">
   <div class="container">
-    <p class="section-tag fade-up">Technical Expertise</p>
-    <h2 class="section-title fade-up">Skills &amp; Technologies</h2>
-    <p class="section-sub fade-up">A comprehensive toolkit built through real-world projects, continuous learning, and production delivery.</p>
+    <div class="sec-tag fade-up">03 — Technical Expertise</div>
+    <h2 class="sec-title fade-up">Skills &amp; Technologies</h2>
+    <p class="sec-sub fade-up">A comprehensive toolkit built through real-world projects, continuous learning, and production delivery.</p>
     <div class="skills-layout">
       <div>
-        <div class="skill-category fade-up">
+        <div class="skill-cat fade-up">
           <div class="skill-cat-title"><i class="fas fa-code"></i> Languages</div>
           <div class="skill-tags">
             <span class="tag">C#</span><span class="tag">PL-SQL / T-SQL</span><span class="tag">JavaScript</span><span class="tag">HTML5 / CSS3</span>
           </div>
         </div>
-        <div class="skill-category fade-up">
+        <div class="skill-cat fade-up">
           <div class="skill-cat-title"><i class="fas fa-cubes"></i> Frameworks &amp; Libraries</div>
           <div class="skill-tags">
             <span class="tag">.NET Core 6/7/8</span><span class="tag">.NET Framework 4.8</span><span class="tag">Blazor</span><span class="tag">ASP.NET Core MVC</span><span class="tag">Web API / Minimal API</span><span class="tag">Angular</span><span class="tag">.NET MAUI</span><span class="tag">WinForms</span><span class="tag">EF Core</span><span class="tag">ADO.NET</span>
           </div>
         </div>
-        <div class="skill-category fade-up">
+        <div class="skill-cat fade-up">
           <div class="skill-cat-title"><i class="fas fa-database"></i> Databases</div>
           <div class="skill-tags">
             <span class="tag">MS SQL Server</span><span class="tag">Oracle</span><span class="tag">MySQL</span>
           </div>
         </div>
-        <div class="skill-category fade-up">
+        <div class="skill-cat fade-up">
           <div class="skill-cat-title"><i class="fas fa-cloud"></i> DevOps &amp; Infra</div>
           <div class="skill-tags">
             <span class="tag">Git &amp; GitHub</span><span class="tag">Docker</span><span class="tag">Microservices</span><span class="tag">Windows Services</span>
           </div>
         </div>
-        <div class="skill-category fade-up">
+        <div class="skill-cat fade-up">
           <div class="skill-cat-title"><i class="fas fa-star"></i> Patterns &amp; Architecture</div>
           <div class="skill-tags">
             <span class="tag accent">Clean Architecture</span><span class="tag accent">CQRS Pattern</span><span class="tag accent">SOLID Principles</span><span class="tag accent">Repository Pattern</span><span class="tag accent">Design Patterns</span><span class="tag accent">Agile / Scrum</span>
@@ -921,7 +939,7 @@
         </div>
       </div>
       <div class="fade-up tech-visual">
-        <h4>Core Stack Proficiency</h4>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--txt3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px">// Core Stack Proficiency</div>
         <div class="tech-item">
           <i class="fas fa-fire-flame-curved"></i>
           <span class="tech-name">Blazor</span>
@@ -976,22 +994,22 @@
 </section>
 
 <!-- EXPERIENCE -->
-<section id="experience" style="background:var(--card)">
+<section id="experience">
   <div class="container">
-    <p class="section-tag fade-up">Career Journey</p>
-    <h2 class="section-title fade-up">Work Experience</h2>
-    <p class="section-sub fade-up">Real-world development experience building production-grade, secure applications from scratch.</p>
+    <div class="sec-tag fade-up">04 — Career Journey</div>
+    <h2 class="sec-title fade-up">Work Experience</h2>
+    <p class="sec-sub fade-up">Real-world development experience building production-grade, secure applications from scratch.</p>
     <div class="timeline">
 
-      <div class="timeline-item fade-up">
-        <div class="timeline-dot active"></div>
-        <div class="timeline-card">
+      <div class="tl-item fade-up">
+        <div class="tl-dot active"></div>
+        <div class="tl-card">
           <div class="tl-header">
             <div>
               <div class="tl-title">Junior Software Engineer — Full Stack .NET</div>
               <div class="tl-company"><i class="fas fa-building"></i> Createch Softwares Pvt. Ltd., Delhi</div>
             </div>
-            <div class="tl-date">Dec 2024 – Present</div>
+            <div class="tl-date">Dec 2024 — Present</div>
           </div>
           <p class="tl-desc">Working full-time as a Full Stack .NET Developer, building and maintaining production web applications across multiple domains. Responsible for end-to-end delivery — architecture, development, testing, and deployment.</p>
           <ul class="resp-list">
@@ -1009,9 +1027,9 @@
         </div>
       </div>
 
-      <div class="timeline-item fade-up">
-        <div class="timeline-dot"></div>
-        <div class="timeline-card">
+      <div class="tl-item fade-up">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
           <div class="tl-header">
             <div>
               <div class="tl-title">.NET Developer Intern</div>
@@ -1039,13 +1057,12 @@
 <!-- PROJECTS -->
 <section id="projects">
   <div class="container">
-    <p class="section-tag fade-up">Portfolio</p>
-    <h2 class="section-title fade-up">Project Highlights</h2>
-    <p class="section-sub fade-up">Real-world projects delivered across multiple domains — hospital management, e-commerce, enterprise APIs, hospitality, and more.</p>
+    <div class="sec-tag fade-up">05 — Portfolio</div>
+    <h2 class="sec-title fade-up">Project Highlights</h2>
+    <p class="sec-sub fade-up">Real-world projects delivered across multiple domains — hospital management, e-commerce, enterprise APIs, hospitality, and more.</p>
     <div class="projects-grid">
 
-      <!-- P1 -->
-      <div class="project-card fade-up">
+      <div class="proj-card fade-up">
         <div class="proj-num">01</div>
         <div class="proj-icon"><i class="fas fa-server"></i></div>
         <div class="proj-title">Database Archiving Windows Service</div>
@@ -1055,7 +1072,7 @@
         </div>
         <p class="proj-desc">A 24/7 background Windows Service that monitors system events, performs scheduled database archiving, and includes automatic error-handling and self-recovery for zero-downtime enterprise operation.</p>
         <div class="proj-resp">
-          <h5>Key Contributions</h5>
+          <h5>// Key Contributions</h5>
           <ul class="resp-list">
             <li>Designed continuous service with scheduled task execution</li>
             <li>Built automated error recovery and alerting mechanisms</li>
@@ -1064,8 +1081,7 @@
         </div>
       </div>
 
-      <!-- P2 -->
-      <div class="project-card fade-up" style="transition-delay:0.08s">
+      <div class="proj-card fade-up" style="transition-delay:.07s">
         <div class="proj-num">02</div>
         <div class="proj-icon"><i class="fas fa-hospital"></i></div>
         <div class="proj-title">Real-Time Hospital Management System</div>
@@ -1075,7 +1091,7 @@
         </div>
         <p class="proj-desc">Full-stack hospital management system with SOLID principles and CQRS design patterns. Separate microservices for authentication, patient bookings, room management, and real-time dashboards.</p>
         <div class="proj-resp">
-          <h5>Key Contributions</h5>
+          <h5>// Key Contributions</h5>
           <ul class="resp-list">
             <li>Designed microservice APIs for user auth and patient booking</li>
             <li>Built Blazor components with Blazorise grids and charts</li>
@@ -1084,8 +1100,7 @@
         </div>
       </div>
 
-      <!-- P3 -->
-      <div class="project-card fade-up" style="transition-delay:0.16s">
+      <div class="proj-card fade-up" style="transition-delay:.14s">
         <div class="proj-num">03</div>
         <div class="proj-icon"><i class="fas fa-arrow-right-arrow-left"></i></div>
         <div class="proj-title">Desktop to Web Application Migration</div>
@@ -1095,7 +1110,7 @@
         </div>
         <p class="proj-desc">Migrated a legacy desktop application to a modern Blazor web app. Users can now order, manage data, and authenticate from any browser — with local storage management and full user profiles.</p>
         <div class="proj-resp">
-          <h5>Key Contributions</h5>
+          <h5>// Key Contributions</h5>
           <ul class="resp-list">
             <li>Implemented local storage, auth, registration, and order APIs</li>
             <li>Developed responsive Blazor UI with Blazorise components</li>
@@ -1104,8 +1119,7 @@
         </div>
       </div>
 
-      <!-- P4: Hospitality -->
-      <div class="project-card fade-up" style="transition-delay:0.08s">
+      <div class="proj-card fade-up" style="transition-delay:.07s">
         <div class="proj-num">04</div>
         <div class="proj-icon"><i class="fas fa-hotel"></i></div>
         <div class="proj-title">Hotel &amp; Hospitality Management Platform</div>
@@ -1113,20 +1127,18 @@
         <div class="proj-pills">
           <span class="ppill">Blazor</span><span class="ppill">.NET 8</span><span class="ppill">ASP.NET Core</span><span class="ppill">EF Core</span><span class="ppill">SQL Server</span><span class="ppill">Web API</span>
         </div>
-        <p class="proj-desc">A comprehensive hospitality management solution covering room booking, guest check-in/check-out, housekeeping workflows, billing, and real-time availability dashboards — built with full Clean Architecture and secure API layers.</p>
+        <p class="proj-desc">A comprehensive hospitality management solution covering room booking, guest check-in/check-out, housekeeping workflows, billing, and real-time availability dashboards — built with full Clean Architecture.</p>
         <div class="proj-resp">
-          <h5>Key Contributions</h5>
+          <h5>// Key Contributions</h5>
           <ul class="resp-list">
             <li>Developed room reservation, availability, and pricing APIs</li>
             <li>Built interactive guest management and billing dashboards in Blazor</li>
             <li>Implemented role-based access for admin, staff, and front-desk users</li>
-            <li>Designed efficient stored procedures for reporting and audit logs</li>
           </ul>
         </div>
       </div>
 
-      <!-- P5: E-Commerce with Shopify + Razorpay -->
-      <div class="project-card fade-up" style="transition-delay:0.16s">
+      <div class="proj-card fade-up" style="transition-delay:.14s">
         <div class="proj-num">05</div>
         <div class="proj-icon"><i class="fas fa-bag-shopping"></i></div>
         <div class="proj-title">E-Commerce Platform — Shopify &amp; Razorpay</div>
@@ -1134,34 +1146,31 @@
         <div class="proj-pills">
           <span class="ppill">ASP.NET Core</span><span class="ppill">Blazor</span><span class="ppill">Shopify API</span><span class="ppill">Razorpay</span><span class="ppill">.NET 8</span><span class="ppill">MySQL</span>
         </div>
-        <p class="proj-desc">Full-stack e-commerce web application with Shopify storefront integration and Razorpay payment gateway. Features include product catalogue, cart management, secure checkout, order tracking, and admin reporting — with full OWASP security compliance.</p>
+        <p class="proj-desc">Full-stack e-commerce platform with Shopify storefront integration and Razorpay payment gateway. Features include product catalogue, cart management, secure checkout, order tracking, and admin reporting.</p>
         <div class="proj-resp">
-          <h5>Key Contributions</h5>
+          <h5>// Key Contributions</h5>
           <ul class="resp-list">
             <li>Integrated Shopify API for product sync, inventory, and order management</li>
             <li>Implemented Razorpay payment gateway with webhook handling and refunds</li>
             <li>Built secure checkout flow with input validation and fraud prevention</li>
-            <li>Developed admin dashboard for sales analytics and order fulfilment</li>
           </ul>
         </div>
       </div>
 
-      <!-- P6: .NET Minimal API + OpenAPI -->
-      <div class="project-card fade-up" style="transition-delay:0.24s">
+      <div class="proj-card fade-up" style="transition-delay:.21s">
         <div class="proj-num">06</div>
         <div class="proj-icon"><i class="fas fa-code-branch"></i></div>
-        <div class="proj-title">.NET Minimal API — OpenAPI Backend Integration</div>
+        <div class="proj-title">.NET Minimal API — OpenAPI Backend</div>
         <div class="proj-domain"><i class="fas fa-network-wired"></i> API Development</div>
         <div class="proj-pills">
           <span class="ppill">Minimal API</span><span class="ppill">.NET 8</span><span class="ppill">OpenAPI/Swagger</span><span class="ppill">JWT Auth</span><span class="ppill">EF Core</span><span class="ppill">SQL Server</span>
         </div>
-        <p class="proj-desc">Designed and built a high-performance backend using .NET 8 Minimal APIs with complete OpenAPI/Swagger documentation. Includes JWT authentication, role-based authorization, rate limiting, global error handling, and third-party API integrations — following CQRS and Clean Architecture patterns.</p>
+        <p class="proj-desc">High-performance backend using .NET 8 Minimal APIs with complete OpenAPI/Swagger documentation. Includes JWT authentication, role-based authorization, rate limiting, global error handling, and third-party API integrations.</p>
         <div class="proj-resp">
-          <h5>Key Contributions</h5>
+          <h5>// Key Contributions</h5>
           <ul class="resp-list">
             <li>Built lightweight, high-performance endpoints using .NET Minimal API</li>
             <li>Implemented full OpenAPI spec with Swagger UI for client integration</li>
-            <li>Integrated third-party APIs with resilient retry and fallback policies</li>
             <li>Added JWT auth, global exception middleware, and request logging</li>
           </ul>
         </div>
@@ -1172,34 +1181,34 @@
 </section>
 
 <!-- EDUCATION -->
-<section id="education" style="background:var(--card)">
+<section id="education">
   <div class="container">
-    <p class="section-tag fade-up">Academic Background</p>
-    <h2 class="section-title fade-up">Education</h2>
-    <p class="section-sub fade-up">Strong academic foundation complemented by intensive practical training and real-world project experience.</p>
+    <div class="sec-tag fade-up">06 — Academic Background</div>
+    <h2 class="sec-title fade-up">Education</h2>
+    <p class="sec-sub fade-up">Strong academic foundation complemented by intensive practical training and real-world project experience.</p>
     <div class="edu-grid">
       <div class="edu-card fade-up">
         <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
         <div>
           <div class="edu-degree">Bachelor of Arts with Maths (BAM)</div>
-          <div class="edu-school">H.B.B. PG. College, Khatima</div>
-          <div class="edu-meta"><span class="ebadge green">July 2024</span></div>
+          <div class="edu-school">// H.B.B. PG. College, Khatima</div>
+          <div class="edu-meta"><span class="ebadge blue">July 2024</span></div>
         </div>
       </div>
-      <div class="edu-card fade-up" style="transition-delay:0.08s">
+      <div class="edu-card fade-up" style="transition-delay:.07s">
         <div class="edu-icon"><i class="fas fa-school"></i></div>
         <div>
           <div class="edu-degree">Intermediate (12th Grade)</div>
-          <div class="edu-school">G.I.C Lohaghat, Champawat</div>
-          <div class="edu-meta"><span class="ebadge green">April 2022</span><span class="ebadge gold">74.8%</span></div>
+          <div class="edu-school">// G.I.C Lohaghat, Champawat</div>
+          <div class="edu-meta"><span class="ebadge blue">April 2022</span><span class="ebadge amber">74.8%</span></div>
         </div>
       </div>
-      <div class="edu-card fade-up" style="transition-delay:0.16s">
+      <div class="edu-card fade-up" style="transition-delay:.14s">
         <div class="edu-icon"><i class="fas fa-book-open"></i></div>
         <div>
           <div class="edu-degree">High School (10th Grade)</div>
-          <div class="edu-school">PT.D.D.U Ezra, Lohaghat</div>
-          <div class="edu-meta"><span class="ebadge green">March 2020</span><span class="ebadge gold">86.8%</span></div>
+          <div class="edu-school">// PT.D.D.U Ezra, Lohaghat</div>
+          <div class="edu-meta"><span class="ebadge blue">March 2020</span><span class="ebadge amber">86.8%</span></div>
         </div>
       </div>
     </div>
@@ -1209,10 +1218,10 @@
 <!-- CONTACT -->
 <section id="contact">
   <div class="container">
-    <div class="contact-layout">
+    <div class="contact-grid">
       <div class="fade-up">
-        <p class="section-tag">Let's Work Together</p>
-        <h2 class="contact-heading">Ready to Build Something <em>Great?</em></h2>
+        <div class="sec-tag">07 — Let's Work Together</div>
+        <h2 class="contact-heading">Ready to Build<br>Something <span>Great?</span></h2>
         <p class="contact-intro">Whether you need a Blazor web application, a secure REST API, an e-commerce solution, or a full enterprise system — I'm here to deliver clean, secure, and scalable .NET software. Let's discuss your project.</p>
         <div class="contact-links">
           <a href="mailto:pantmanoj2005@gmail.com" class="clink">
@@ -1233,14 +1242,15 @@
           </a>
         </div>
       </div>
-      <div class="hire-box fade-up" style="transition-delay:0.15s">
+      <div class="hire-box fade-up" style="transition-delay:.15s">
+        <div class="hire-glow"></div>
         <i class="fas fa-handshake big"></i>
         <h3>Hire Me for Your Next Project</h3>
         <p>Looking for a reliable, security-focused .NET developer who delivers clean, scalable, and maintainable applications on time? I'd love to hear about your requirements.</p>
         <a href="mailto:pantmanoj2005@gmail.com" class="hire-btn">
           <i class="fas fa-paper-plane"></i> Send Me a Message
         </a>
-        <div class="hire-note">📍 Based in Delhi &nbsp;·&nbsp; Open to Remote &amp; Freelance</div>
+        <div class="hire-note">// Based in Delhi &nbsp;·&nbsp; Open to Remote &amp; Freelance</div>
       </div>
     </div>
   </div>
@@ -1259,46 +1269,43 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 
+  // Stat bars top border
+  const statObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.stat-item').forEach(s => s.classList.add('visible'));
+        statObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  const statsEl = document.querySelector('.hero-stats');
+  if (statsEl) statObs.observe(statsEl);
+
   // Animate tech bars
   const barObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.querySelectorAll('.tech-bar').forEach(bar => {
           const target = bar.getAttribute('data-width');
-          setTimeout(() => { bar.style.width = target; }, 150);
+          setTimeout(() => { bar.style.width = target; }, 200);
         });
         barObs.unobserve(e.target);
       }
     });
-  }, { threshold: 0.25 });
+  }, { threshold: 0.3 });
   document.querySelectorAll('.tech-visual').forEach(el => barObs.observe(el));
 
-  // Counter animation for stats
-  function animateCounter(el, target, suffix) {
-    let start = 0;
-    const step = Math.ceil(target / 40);
-    const interval = setInterval(() => {
-      start += step;
-      if (start >= target) { el.textContent = target + suffix; clearInterval(interval); return; }
-      el.textContent = start + suffix;
-    }, 35);
-  }
-  const statsObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const nums = e.target.querySelectorAll('.stat-num');
-        nums.forEach(n => {
-          const txt = n.textContent;
-          if (txt.includes('30')) animateCounter(n, 30, '+');
-          else if (txt.includes('100')) animateCounter(n, 100, '%');
-        });
-        statsObs.unobserve(e.target);
-      }
+  // Subtle cursor glow on hero
+  const hero = document.querySelector('.hero');
+  if (hero) {
+    hero.addEventListener('mousemove', (e) => {
+      const rect = hero.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      hero.style.setProperty('--mx', x + 'px');
+      hero.style.setProperty('--my', y + 'px');
     });
-  }, { threshold: 0.5 });
-  const statsSection = document.querySelector('.hero-stats');
-  if (statsSection) statsObs.observe(statsSection);
+  }
 </script>
 </body>
 </html>
-
