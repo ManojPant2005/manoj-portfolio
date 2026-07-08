@@ -1,801 +1,425 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Manoj Pant — Full Stack .NET Developer</title>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <style>
-    :root {
-      --bg: #07090f;
-      --bg2: #0d1117;
-      --bg3: #141920;
-      --bor: #1e2736;
-      --bor2: #263040;
-      --txt: #e2e8f0;
-      --txt2: #8896aa;
-      --txt3: #4a5568;
-      --blue: #3b82f6;
-      --blue-dim: #1e40af22;
-      --blue-glow: #3b82f640;
-      --green: #22c55e;
-      --green-dim: #15803d22;
-      --amber: #f59e0b;
-      --amber-dim: #92400e22;
-      --red: #ef4444;
-      --red-dim: #991b1b22;
-      --purple: #a855f7;
-      --purple-dim: #6b21a822;
-      --cyan: #06b6d4;
-      --cyan-dim: #0e749022;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Manoj Pant — Full Stack .NET Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+  :root{
+    --bg:#F6F7FA;
+    --surface:#FFFFFF;
+    --ink:#13161C;
+    --ink-soft:#4B5563;
+    --ink-mute:#8A93A3;
+    --line:#E4E7ED;
+    --accent:#4F2AD1;
+    --accent-2:#7C3AED;
+    --accent-soft:#EFEAFB;
+    --accent-deep:#241255;
+    --amber:#B45309;
+    --amber-soft:#FBEDD8;
+    --green:#0E9F6E;
+    --green-soft:#E4F7EF;
+    --radius:10px;
+    --maxw:1120px;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--bg);
+    color:var(--ink-soft);
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;color:var(--ink);}
+  a{color:inherit;}
+  ::selection{background:var(--accent-soft);color:var(--accent-deep);}
+  ::-webkit-scrollbar{width:8px;}
+  ::-webkit-scrollbar-track{background:var(--bg);}
+  ::-webkit-scrollbar-thumb{background:#D3D7E0;border-radius:8px;}
+  ::-webkit-scrollbar-thumb:hover{background:var(--accent);}
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+  .container{max-width:var(--maxw);margin:0 auto;padding:0 6%;}
 
-    body {
-      font-family: 'Syne', sans-serif;
-      background: var(--bg);
-      color: var(--txt);
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:200;
+    background:rgba(246,247,250,0.86);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+    height:64px;
+  }
+  .nav-inner{
+    max-width:var(--maxw);margin:0 auto;padding:0 6%;height:64px;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .nav-brand{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.02rem;color:var(--ink);letter-spacing:-.01em;}
+  .nav-brand span{color:var(--accent);}
+  .nav-links{display:flex;gap:2px;list-style:none;align-items:center;}
+  .nav-links a{
+    display:flex;align-items:center;height:64px;padding:0 14px;
+    text-decoration:none;color:var(--ink-mute);
+    font-size:.83rem;font-weight:500;
+    border-bottom:2px solid transparent;
+    transition:all .2s;
+  }
+  .nav-links a:hover{color:var(--ink);}
+  .nav-resume{
+    background:var(--accent) !important;color:#fff !important;
+    border-radius:8px;height:38px !important;margin-left:8px;
+    padding:0 18px !important;font-weight:600 !important;
+    border-bottom:none !important;
+  }
+  .nav-resume:hover{background:var(--accent-2) !important;}
 
-    /* ── SCROLLBAR ── */
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: var(--bg2); }
-    ::-webkit-scrollbar-thumb { background: var(--bor2); border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--blue); }
+  /* HERO */
+  .hero{
+    min-height:92vh;
+    padding:150px 6% 80px;
+    position:relative;
+    display:flex;align-items:center;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:'';position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(79,42,209,0.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(79,42,209,0.055) 1px, transparent 1px);
+    background-size:56px 56px;
+    mask-image:radial-gradient(ellipse 75% 70% at 30% 40%, black 20%, transparent 85%);
+  }
+  .hero-glow{
+    position:absolute;width:520px;height:520px;border-radius:50%;
+    background:radial-gradient(circle, rgba(124,58,237,0.14) 0%, transparent 68%);
+    top:-140px;right:-120px;pointer-events:none;
+  }
+  .hero-inner{
+    max-width:var(--maxw);margin:auto;width:100%;
+    display:grid;grid-template-columns:1.15fr .85fr;
+    gap:56px;align-items:center;position:relative;
+  }
+  .hero-tag{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:600;
+    letter-spacing:.06em;text-transform:uppercase;
+    color:var(--accent);background:var(--accent-soft);
+    border:1px solid #E1D6FA;
+    padding:6px 12px;border-radius:20px;margin-bottom:1.4rem;
+  }
+  .pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px var(--green-soft);}
+  .hero h1{
+    font-size:clamp(2.4rem,4.6vw,3.4rem);font-weight:700;line-height:1.1;
+    letter-spacing:-.02em;margin-bottom:.5rem;
+  }
+  .hero .role{
+    font-size:clamp(1.1rem,2vw,1.35rem);font-weight:600;color:var(--accent);margin-bottom:1.3rem;
+  }
+  .hero-desc{
+    font-size:.98rem;color:var(--ink-soft);max-width:540px;line-height:1.85;margin-bottom:1.9rem;
+  }
+  .hero-desc strong{color:var(--ink);font-weight:600;}
+  .hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:2.6rem;}
+  .btn-primary{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--accent);color:#fff;padding:12px 22px;border-radius:8px;
+    font-size:.86rem;font-weight:600;text-decoration:none;
+    transition:all .22s;box-shadow:0 6px 18px rgba(79,42,209,0.18);
+  }
+  .btn-primary:hover{background:var(--accent-2);transform:translateY(-2px);box-shadow:0 10px 24px rgba(79,42,209,0.28);}
+  .btn-outline{
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid var(--line);color:var(--ink-soft);background:var(--surface);
+    padding:12px 22px;border-radius:8px;
+    font-size:.86rem;font-weight:600;text-decoration:none;transition:all .22s;
+  }
+  .btn-outline:hover{border-color:var(--accent);color:var(--accent);}
 
-    /* ── NOISE OVERLAY ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 999;
-      opacity: 0.4;
-    }
+  .hero-stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);background:var(--surface);border-radius:12px;overflow:hidden;}
+  .stat-item{padding:16px 14px;border-right:1px solid var(--line);}
+  .stat-item:last-child{border-right:none;}
+  .stat-num{font-family:'Space Grotesk',sans-serif;font-size:1.45rem;font-weight:700;color:var(--accent);display:block;line-height:1;margin-bottom:5px;}
+  .stat-label{font-size:.66rem;font-weight:600;letter-spacing:.03em;color:var(--ink-mute);}
 
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      background: rgba(7,9,15,0.92);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--bor);
-      padding: 0 6%;
-      display: flex; align-items: center; justify-content: space-between;
-      height: 58px;
-    }
-    .nav-brand {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .78rem;
-      font-weight: 700;
-      color: var(--txt2);
-      letter-spacing: .18em;
-      text-transform: uppercase;
-    }
-    .nav-brand span { color: var(--blue); }
-    .nav-links { display: flex; gap: 0; list-style: none; align-items: center; }
-    .nav-links a {
-      display: flex; align-items: center; height: 58px;
-      padding: 0 16px;
-      text-decoration: none;
-      color: var(--txt3);
-      font-size: .75rem;
-      font-weight: 700;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      border-bottom: 2px solid transparent;
-      transition: all .2s;
-    }
-    .nav-links a:hover { color: var(--txt2); border-bottom-color: var(--bor2); }
-    .nav-cta {
-      background: var(--blue) !important;
-      color: #fff !important;
-      border-radius: 0 !important;
-      border-bottom: 2px solid transparent !important;
-      margin-left: 8px;
-      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-    }
-    .nav-cta:hover { background: #2563eb !important; }
+  /* HERO CARD */
+  .hero-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 20px 50px -20px rgba(20,20,40,0.15);}
+  .hc-header{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;background:linear-gradient(180deg,#FAFAFD,var(--surface));}
+  .hc-dots{display:flex;gap:6px;}
+  .hc-dot{width:9px;height:9px;border-radius:50%;}
+  .hc-title{font-family:'JetBrains Mono',monospace;font-size:.63rem;color:var(--ink-mute);letter-spacing:.06em;}
 
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      padding: 100px 6% 80px;
-      position: relative;
-      display: flex; align-items: center;
-      overflow: hidden;
-    }
+  .avatar-row{padding:22px 20px;display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--line);}
+  .avatar{
+    width:58px;height:58px;border-radius:12px;
+    background:linear-gradient(135deg,var(--accent) 0%,var(--accent-2) 100%);
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-family:'Space Grotesk',sans-serif;font-size:1.15rem;font-weight:700;flex-shrink:0;
+  }
+  .card-name{font-size:1.05rem;font-weight:700;color:var(--ink);}
+  .card-role{font-size:.76rem;color:var(--accent);font-weight:600;margin-top:2px;}
+  .card-loc{font-size:.75rem;color:var(--ink-mute);margin-top:5px;display:flex;align-items:center;gap:5px;}
+  .status-badge{
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--green-soft);color:var(--green);
+    font-size:.66rem;font-weight:700;padding:4px 10px;border-radius:20px;margin-top:8px;
+  }
+  .status-badge span{width:6px;height:6px;border-radius:50%;background:var(--green);}
 
-    /* Grid background */
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background-image:
-        linear-gradient(var(--bor) 1px, transparent 1px),
-        linear-gradient(90deg, var(--bor) 1px, transparent 1px);
-      background-size: 60px 60px;
-      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
-      opacity: .3;
-    }
+  .info-list{padding:6px 20px;border-bottom:1px solid var(--line);}
+  .info-item{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid #F0F1F5;font-size:.84rem;}
+  .info-item:last-child{border-bottom:none;}
+  .info-icon{width:30px;height:30px;border-radius:8px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;}
+  .info-label{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--ink-mute);letter-spacing:.05em;text-transform:uppercase;display:block;}
+  .info-val{color:var(--ink);font-size:.82rem;font-weight:500;}
+  .info-val a{text-decoration:none;}
+  .info-val a:hover{color:var(--accent);}
 
-    /* Glow orbs */
-    .hero-orb1 {
-      position: absolute; width: 600px; height: 600px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 65%);
-      top: -100px; right: -100px; pointer-events: none;
-    }
-    .hero-orb2 {
-      position: absolute; width: 400px; height: 400px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(168,85,247,0.07) 0%, transparent 65%);
-      bottom: 0; left: 0; pointer-events: none;
-    }
+  .hc-skills{padding:18px 20px;}
+  .hcs-label{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:10px;}
+  .hcs-chips{display:flex;flex-wrap:wrap;gap:6px;}
+  .hcs-chip{background:var(--bg);border:1px solid var(--line);color:var(--ink-soft);padding:5px 11px;border-radius:6px;font-size:.72rem;font-weight:500;}
 
-    .hero-inner {
-      max-width: 1200px; margin: auto; width: 100%;
-      display: grid; grid-template-columns: 1.2fr 0.8fr;
-      gap: 60px; align-items: center; position: relative;
-    }
+  /* SECTIONS */
+  section{padding:88px 6%;}
+  .sec-tag{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:'JetBrains Mono',monospace;font-size:.66rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:12px;
+  }
+  .sec-tag::before{content:'';width:16px;height:1px;background:var(--accent);}
+  .sec-title{font-size:clamp(1.65rem,3vw,2.2rem);font-weight:700;letter-spacing:-.02em;margin-bottom:10px;}
+  .sec-sub{font-size:.92rem;color:var(--ink-mute);max-width:600px;margin-bottom:3rem;line-height:1.75;}
 
-    /* TAG */
-    .hero-tag {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .62rem; font-weight: 700; letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--blue);
-      background: var(--blue-dim);
-      border: 1px solid var(--blue-glow);
-      padding: 5px 12px; border-radius: 4px;
-      margin-bottom: 1.4rem;
-    }
-    .pulse-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 8px var(--green);
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.5)} }
+  #about{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:start;}
+  .about-text{font-size:.93rem;color:var(--ink-soft);line-height:1.9;}
+  .about-text p{margin-bottom:1rem;}
+  .about-text strong{color:var(--ink);font-weight:600;}
 
-    .hero h1 {
-      font-size: clamp(2.6rem, 5.5vw, 4rem);
-      font-weight: 800;
-      line-height: 1.06;
-      letter-spacing: -.03em;
-      margin-bottom: 1.2rem;
-      color: var(--txt);
-    }
-    .hero h1 .accent { color: var(--blue); }
-    .hero h1 .dim { color: var(--txt3); }
+  .highlight-box{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:12px;position:relative;}
+  .highlight-box h4{font-size:.85rem;font-weight:700;color:var(--ink);margin-bottom:8px;display:flex;align-items:center;gap:9px;}
+  .highlight-box h4 i{color:var(--accent);width:16px;text-align:center;}
+  .highlight-box p{font-size:.8rem;color:var(--ink-mute);line-height:1.75;}
+  .chip-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
+  .chip{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:600;padding:4px 9px;border-radius:5px;background:var(--accent-soft);color:var(--accent);}
 
-    .hero-mono {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .75rem; color: var(--txt3);
-      margin-bottom: 1.2rem; line-height: 1.8;
-      border-left: 2px solid var(--bor2);
-      padding-left: 14px;
-    }
-    .hero-mono .key { color: var(--cyan); }
-    .hero-mono .val { color: var(--amber); }
-    .hero-mono .str { color: var(--green); }
+  /* SKILLS */
+  #skills{background:var(--bg);}
+  .skills-layout{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;}
+  .skill-cat{margin-bottom:24px;}
+  .skill-cat-title{font-size:.78rem;font-weight:700;letter-spacing:.02em;color:var(--ink);margin-bottom:11px;display:flex;align-items:center;gap:8px;}
+  .skill-cat-title i{color:var(--accent);width:14px;text-align:center;}
+  .skill-tags{display:flex;flex-wrap:wrap;gap:7px;}
+  .tag{background:var(--surface);border:1px solid var(--line);color:var(--ink-soft);padding:6px 13px;border-radius:7px;font-size:.78rem;font-weight:500;transition:all .2s;}
+  .tag:hover{border-color:var(--accent);color:var(--accent);}
+  .tag.accent{background:var(--accent-soft);border-color:#E1D6FA;color:var(--accent-deep);font-weight:600;}
 
-    .hero-desc {
-      font-size: .95rem; color: var(--txt2);
-      max-width: 520px; line-height: 1.8;
-      margin-bottom: 2rem;
-    }
-    .hero-desc strong { color: var(--txt); font-weight: 700; }
+  .learning-box{background:var(--amber-soft);border:1px dashed #E3A34D;border-radius:12px;padding:20px 22px;}
+  .learning-box h4{font-size:.85rem;font-weight:700;color:var(--amber);margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+  .learning-box p{font-size:.8rem;color:#8A5A1F;line-height:1.7;margin-bottom:12px;}
+  .learning-tags{display:flex;flex-wrap:wrap;gap:7px;}
+  .ltag{background:#fff;border:1px solid #E3A34D;color:var(--amber);padding:6px 13px;border-radius:7px;font-size:.78rem;font-weight:600;display:inline-flex;align-items:center;gap:6px;}
+  .ltag i{font-size:.6rem;}
 
-    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 2.6rem; }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--blue); color: #fff;
-      padding: 11px 24px;
-      font-family: 'Syne', sans-serif;
-      font-size: .82rem; font-weight: 700; letter-spacing: .04em;
-      text-decoration: none;
-      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-      transition: all .25s;
-    }
-    .btn-primary:hover { background: #2563eb; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(59,130,246,0.3); }
-    .btn-outline {
-      display: inline-flex; align-items: center; gap: 8px;
-      border: 1px solid var(--bor2); color: var(--txt2);
-      padding: 11px 24px;
-      font-family: 'Syne', sans-serif;
-      font-size: .82rem; font-weight: 700; letter-spacing: .04em;
-      text-decoration: none;
-      background: transparent;
-      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-      transition: all .25s;
-    }
-    .btn-outline:hover { border-color: var(--blue); color: var(--blue); }
+  .cred-box{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-top:16px;}
+  .cred-box h4{font-size:.85rem;font-weight:700;color:var(--ink);margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+  .cred-box h4 i{color:var(--green);}
+  .cred-box p{font-size:.8rem;color:var(--ink-mute);line-height:1.75;}
 
-    /* STATS */
-    .hero-stats {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      border: 1px solid var(--bor);
-      background: var(--bg2);
-    }
-    .stat-item {
-      padding: 16px 18px;
-      border-right: 1px solid var(--bor);
-      position: relative;
-    }
-    .stat-item:last-child { border-right: none; }
-    .stat-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1.7rem; font-weight: 700;
-      color: var(--blue); line-height: 1;
-      display: block; margin-bottom: 4px;
-    }
-    .stat-label { font-size: .65rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--txt3); }
-    .stat-item::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: var(--blue); transform: scaleX(0); transform-origin: left;
-      transition: transform .4s; transition-delay: var(--d, 0s);
-    }
-    .stat-item.visible::before { transform: scaleX(1); }
+  /* EXPERIENCE */
+  #experience{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .timeline{position:relative;}
+  .timeline::before{content:'';position:absolute;left:15px;top:8px;bottom:8px;width:1px;background:var(--line);}
+  .tl-item{padding-left:48px;margin-bottom:26px;position:relative;}
+  .tl-item:last-child{margin-bottom:0;}
+  .tl-dot{position:absolute;left:8px;top:9px;width:15px;height:15px;border-radius:50%;background:var(--surface);border:2px solid var(--line);}
+  .tl-dot.active{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft);}
+  .tl-card{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:24px;}
+  .tl-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:6px;}
+  .tl-title{font-size:1.02rem;font-weight:700;color:var(--ink);}
+  .tl-company{font-size:.78rem;color:var(--accent);margin-top:4px;font-weight:600;display:flex;align-items:center;gap:6px;}
+  .tl-date{font-family:'JetBrains Mono',monospace;background:var(--accent-soft);color:var(--accent-deep);padding:4px 11px;border-radius:6px;font-size:.66rem;font-weight:700;white-space:nowrap;}
+  .tl-desc{color:var(--ink-mute);font-size:.85rem;margin:10px 0;line-height:1.75;}
+  .resp-list{list-style:none;margin-top:10px;}
+  .resp-list li{display:flex;align-items:flex-start;gap:9px;font-size:.83rem;color:var(--ink-soft);margin-bottom:8px;line-height:1.65;}
+  .resp-list li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:8px;}
+  .tech-pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;}
+  .tpill{font-family:'JetBrains Mono',monospace;background:var(--surface);border:1px solid var(--line);color:var(--accent-deep);padding:4px 10px;border-radius:5px;font-size:.65rem;font-weight:600;}
 
-    /* HERO CARD */
-    .hero-card {
-      background: var(--bg2);
-      border: 1px solid var(--bor);
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, var(--blue), var(--cyan), var(--purple));
-    }
-    .hc-header {
-      padding: 20px;
-      border-bottom: 1px solid var(--bor);
-      display: flex; align-items: center; gap: 12px;
-    }
-    .hc-dots { display: flex; gap: 6px; }
-    .hc-dot {
-      width: 10px; height: 10px; border-radius: 50%;
-    }
-    .hc-title {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .65rem; color: var(--txt3);
-      letter-spacing: .1em; text-transform: uppercase;
-    }
+  /* PROJECTS */
+  #projects{background:var(--bg);}
+  .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;}
+  .proj-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:26px;display:flex;flex-direction:column;transition:box-shadow .25s, transform .25s;}
+  .proj-card:hover{box-shadow:0 16px 34px -18px rgba(20,20,40,0.22);transform:translateY(-3px);}
+  .proj-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+  .proj-icon{width:40px;height:40px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+  .proj-badge{font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:700;padding:4px 9px;border-radius:5px;background:var(--green-soft);color:var(--green);letter-spacing:.03em;text-transform:uppercase;}
+  .proj-badge.gov{background:var(--amber-soft);color:var(--amber);}
+  .proj-title{font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:4px;}
+  .proj-domain{font-size:.72rem;color:var(--ink-mute);margin-bottom:12px;display:flex;align-items:center;gap:5px;font-weight:500;}
+  .proj-pills{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px;}
+  .ppill{font-family:'JetBrains Mono',monospace;background:var(--bg);border:1px solid var(--line);color:var(--ink-mute);padding:3px 9px;border-radius:5px;font-size:.62rem;font-weight:600;}
+  .proj-desc{font-size:.82rem;color:var(--ink-soft);line-height:1.75;margin-bottom:14px;flex:1;}
+  .proj-resp h5{font-size:.62rem;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);margin-bottom:9px;font-weight:700;}
 
-    .avatar-row {
-      padding: 20px;
-      display: flex; align-items: center; gap: 14px;
-      border-bottom: 1px solid var(--bor);
-    }
-    .avatar {
-      width: 64px; height: 64px; border-radius: 0;
-      background: linear-gradient(135deg, var(--blue) 0%, var(--cyan) 100%);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'JetBrains Mono', monospace;
-      color: #fff; font-size: 1.3rem; font-weight: 700;
-      clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
-      flex-shrink: 0;
-      box-shadow: 0 0 30px rgba(59,130,246,0.25);
-    }
-    .card-name { font-size: 1.15rem; font-weight: 800; color: var(--txt); }
-    .card-role { font-family: 'JetBrains Mono', monospace; font-size: .68rem; color: var(--blue); margin-top: 3px; }
-    .card-loc { font-size: .73rem; color: var(--txt3); margin-top: 4px; display: flex; align-items: center; gap: 5px; }
-    .status-badge {
-      display: inline-flex; align-items: center; gap: 5px;
-      background: var(--green-dim); border: 1px solid #15803d55;
-      color: var(--green);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .6rem; font-weight: 700; letter-spacing: .08em;
-      padding: 3px 9px; margin-top: 6px;
-    }
-    .status-badge span { width: 5px; height: 5px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); }
+  /* EDUCATION + LANGUAGES */
+  #education{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .edu-lang-grid{display:grid;grid-template-columns:2fr 1fr;gap:20px;align-items:start;}
+  .edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;}
+  .edu-card{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:22px;display:flex;gap:16px;}
+  .edu-icon{width:42px;height:42px;flex-shrink:0;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-size:1rem;}
+  .edu-degree{font-size:.9rem;font-weight:700;color:var(--ink);}
+  .edu-school{font-size:.78rem;color:var(--ink-mute);margin:4px 0;}
+  .edu-meta{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
+  .ebadge{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;padding:3px 9px;border-radius:5px;background:var(--accent-soft);color:var(--accent-deep);}
 
-    .info-list { padding: 14px 20px; border-bottom: 1px solid var(--bor); }
-    .info-item {
-      display: flex; align-items: center; gap: 12px;
-      padding: 9px 0;
-      border-bottom: 1px solid rgba(30,39,54,0.6);
-      font-size: .82rem;
-    }
-    .info-item:last-child { border-bottom: none; }
-    .info-icon {
-      width: 28px; height: 28px;
-      background: var(--blue-dim); border: 1px solid var(--blue-glow);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--blue); font-size: .7rem; flex-shrink: 0;
-    }
-    .info-label { font-family: 'JetBrains Mono', monospace; font-size: .58rem; color: var(--txt3); letter-spacing: .08em; text-transform: uppercase; display: block; }
-    .info-val { color: var(--txt2); font-size: .78rem; }
-    .info-val a { color: var(--cyan); text-decoration: none; transition: color .2s; }
-    .info-val a:hover { color: var(--blue); }
+  .lang-card{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:22px;height:100%;}
+  .lang-card h4{font-size:.8rem;font-weight:700;color:var(--ink);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+  .lang-card h4 i{color:var(--accent);}
+  .lang-item{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line);font-size:.82rem;}
+  .lang-item:last-child{border-bottom:none;}
+  .lang-level{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--accent);font-weight:700;}
 
-    .hc-skills { padding: 16px 20px; }
-    .hcs-label { font-family: 'JetBrains Mono', monospace; font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; color: var(--txt3); margin-bottom: 10px; }
-    .hcs-chips { display: flex; flex-wrap: wrap; gap: 6px; }
-    .hcs-chip {
-      background: var(--bg3); border: 1px solid var(--bor2);
-      color: var(--txt2); padding: 4px 10px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .65rem; font-weight: 700;
-      transition: all .2s;
-    }
-    .hcs-chip:hover { border-color: var(--blue); color: var(--blue); }
+  /* CONTACT */
+  #contact{background:var(--bg);}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;}
+  .contact-heading{font-size:2rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.9rem;line-height:1.18;}
+  .contact-heading span{color:var(--accent);}
+  .contact-intro{font-size:.9rem;color:var(--ink-mute);line-height:1.85;margin-bottom:1.8rem;}
+  .contact-links{display:flex;flex-direction:column;gap:10px;}
+  .clink{
+    display:flex;align-items:center;gap:14px;padding:14px 16px;
+    background:var(--surface);border:1px solid var(--line);border-radius:10px;
+    text-decoration:none;color:var(--ink-soft);font-size:.84rem;font-weight:500;
+    transition:all .2s;
+  }
+  .clink:hover{border-color:var(--accent);transform:translateX(4px);}
+  .clink i{color:var(--accent);width:18px;text-align:center;flex-shrink:0;font-size:1rem;}
+  .clink-label{font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-mute);display:block;}
+  .clink-val{font-size:.85rem;font-weight:600;color:var(--ink);}
 
-    /* ── SECTIONS ── */
-    section { padding: 90px 6%; }
-    .container { max-width: 1200px; margin: auto; }
+  .hire-box{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:44px 34px;text-align:center;position:relative;overflow:hidden;box-shadow:0 20px 50px -25px rgba(20,20,40,0.18);}
+  .hire-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-2));}
+  .hire-box i.big{font-size:2.1rem;color:var(--accent);margin-bottom:1.2rem;display:block;}
+  .hire-box h3{font-size:1.35rem;font-weight:700;margin-bottom:.8rem;}
+  .hire-box p{font-size:.84rem;color:var(--ink-mute);line-height:1.75;margin-bottom:1.8rem;}
+  .hire-btn{
+    display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;
+    padding:13px 28px;border-radius:9px;font-size:.85rem;font-weight:600;text-decoration:none;transition:all .22s;
+  }
+  .hire-btn:hover{background:var(--accent-2);box-shadow:0 10px 26px rgba(79,42,209,0.3);}
+  .hire-note{margin-top:16px;font-size:.72rem;color:var(--ink-mute);}
 
-    .sec-tag {
-      display: inline-block;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .62rem; font-weight: 700; letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--blue);
-      background: var(--blue-dim);
-      border: 1px solid var(--blue-glow);
-      padding: 3px 10px;
-      margin-bottom: 10px;
-    }
-    .sec-title {
-      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-      font-weight: 800; letter-spacing: -.03em;
-      color: var(--txt); margin-bottom: 6px;
-    }
-    .sec-sub { font-size: .9rem; color: var(--txt2); max-width: 560px; margin-bottom: 3rem; line-height: 1.7; }
+  footer{background:var(--surface);border-top:1px solid var(--line);text-align:center;padding:26px;font-size:.78rem;color:var(--ink-mute);}
+  footer span{color:var(--accent);font-weight:600;}
 
-    /* ── ABOUT ── */
-    #about { background: var(--bg2); border-top: 1px solid var(--bor); border-bottom: 1px solid var(--bor); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .fade-up{opacity:0;transform:translateY(20px);transition:opacity .6s ease, transform .6s ease;}
+  .fade-up.visible{opacity:1;transform:translateY(0);}
 
-    .about-text { font-size: .9rem; color: var(--txt2); line-height: 1.9; }
-    .about-text p { margin-bottom: 1rem; }
-    .about-text strong { color: var(--txt); font-weight: 700; }
-
-    .proficiency-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 1.6rem; }
-    .prof-item {
-      display: flex; align-items: center; gap: 8px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .68rem; color: var(--txt2);
-      padding: 7px 10px;
-      background: var(--bg3); border: 1px solid var(--bor);
-      transition: all .2s;
-    }
-    .prof-item:hover { border-color: var(--blue); color: var(--txt); }
-    .prof-item i { color: var(--green); font-size: .6rem; }
-
-    .highlight-box {
-      background: var(--bg3); border: 1px solid var(--bor);
-      padding: 18px 20px; margin-bottom: 12px;
-      position: relative; overflow: hidden;
-    }
-    .highlight-box::before {
-      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
-      background: var(--blue);
-    }
-    .highlight-box h4 {
-      font-size: .82rem; font-weight: 700; color: var(--txt);
-      margin-bottom: 8px; display: flex; align-items: center; gap: 8px;
-    }
-    .highlight-box h4 i { color: var(--blue); }
-    .highlight-box p { font-size: .78rem; color: var(--txt2); line-height: 1.7; }
-    .chip-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
-    .chip {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .6rem; font-weight: 700; padding: 3px 8px;
-      background: var(--blue-dim); border: 1px solid var(--blue-glow);
-      color: var(--blue);
-    }
-    .chip.green { background: var(--green-dim); border-color: #15803d55; color: var(--green); }
-    .chip.amber { background: var(--amber-dim); border-color: #92400e55; color: var(--amber); }
-    .chip.purple { background: var(--purple-dim); border-color: #6b21a855; color: var(--purple); }
-
-    /* ── SERVICES ── */
-    #services { background: var(--bg); }
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: var(--bor); border: 1px solid var(--bor); }
-    .service-card {
-      background: var(--bg2); padding: 28px 24px;
-      position: relative; overflow: hidden;
-      transition: background .25s;
-    }
-    .service-card:hover { background: var(--bg3); }
-    .service-card::after {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: var(--blue); transform: scaleX(0); transform-origin: left;
-      transition: transform .3s;
-    }
-    .service-card:hover::after { transform: scaleX(1); }
-    .svc-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .58rem; color: var(--txt3); letter-spacing: .12em;
-      text-transform: uppercase; margin-bottom: 14px;
-    }
-    .svc-icon {
-      width: 40px; height: 40px;
-      background: var(--blue-dim); border: 1px solid var(--blue-glow);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--blue); font-size: 1rem; margin-bottom: 14px;
-    }
-    .svc-title { font-size: .95rem; font-weight: 800; color: var(--txt); margin-bottom: 8px; }
-    .svc-desc { font-size: .8rem; color: var(--txt2); line-height: 1.7; }
-
-    /* ── SKILLS ── */
-    #skills { background: var(--bg2); border-top: 1px solid var(--bor); border-bottom: 1px solid var(--bor); }
-    .skills-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
-    .skill-cat { margin-bottom: 22px; }
-    .skill-cat-title {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .62rem; font-weight: 700; letter-spacing: .12em;
-      text-transform: uppercase; color: var(--txt3);
-      margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
-    }
-    .skill-cat-title i { color: var(--blue); }
-    .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .tag {
-      background: var(--bg3); border: 1px solid var(--bor);
-      color: var(--txt2); padding: 5px 12px;
-      font-family: 'JetBrains Mono', monospace; font-size: .68rem; font-weight: 500;
-      transition: all .2s; cursor: default;
-    }
-    .tag:hover { background: var(--blue-dim); border-color: var(--blue-glow); color: var(--blue); }
-    .tag.accent { background: var(--purple-dim); border-color: #6b21a855; color: var(--purple); }
-    .tag.accent:hover { background: var(--purple-dim); border-color: var(--purple); }
-
-    /* PROFICIENCY BARS */
-    .tech-visual { }
-    .tech-visual h4 { font-size: .82rem; font-weight: 700; color: var(--txt2); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 16px; }
-    .tech-item {
-      display: flex; align-items: center; gap: 12px;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--bor);
-      font-size: .8rem;
-    }
-    .tech-item:last-child { border-bottom: none; }
-    .tech-item i { width: 16px; color: var(--blue); font-size: .85rem; flex-shrink: 0; }
-    .tech-name { min-width: 140px; font-family: 'JetBrains Mono', monospace; font-size: .72rem; color: var(--txt2); }
-    .tech-bar-wrap { flex: 1; height: 3px; background: var(--bor2); position: relative; overflow: hidden; }
-    .tech-bar { height: 100%; background: linear-gradient(90deg, var(--blue), var(--cyan)); transition: width 1.4s cubic-bezier(0.4,0,0.2,1); }
-    .tech-pct { font-family: 'JetBrains Mono', monospace; font-size: .62rem; color: var(--blue); min-width: 30px; text-align: right; }
-
-    /* ── EXPERIENCE ── */
-    #experience { background: var(--bg); }
-    .timeline { position: relative; padding-left: 0; }
-    .timeline::before {
-      content: ''; position: absolute;
-      left: 15px; top: 8px; bottom: 0; width: 1px;
-      background: linear-gradient(to bottom, var(--blue) 0%, var(--bor) 100%);
-    }
-    .tl-item { padding-left: 48px; margin-bottom: 28px; position: relative; }
-    .tl-dot {
-      position: absolute; left: 7px; top: 8px;
-      width: 18px; height: 18px;
-      background: var(--bg3); border: 2px solid var(--bor2);
-      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-    }
-    .tl-dot.active {
-      background: var(--blue); border-color: var(--blue);
-      box-shadow: 0 0 16px rgba(59,130,246,0.5);
-    }
-    .tl-card {
-      background: var(--bg2); border: 1px solid var(--bor);
-      padding: 22px; transition: border-color .25s;
-      position: relative; overflow: hidden;
-    }
-    .tl-card::before {
-      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
-      background: var(--blue); transform: scaleY(0); transform-origin: top;
-      transition: transform .3s;
-    }
-    .tl-card:hover { border-color: var(--bor2); }
-    .tl-card:hover::before { transform: scaleY(1); }
-
-    .tl-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 6px; }
-    .tl-title { font-size: 1rem; font-weight: 800; color: var(--txt); }
-    .tl-company { font-family: 'JetBrains Mono', monospace; font-size: .7rem; color: var(--blue); margin-top: 4px; display: flex; align-items: center; gap: 6px; }
-    .tl-date {
-      font-family: 'JetBrains Mono', monospace;
-      background: var(--blue-dim); border: 1px solid var(--blue-glow);
-      color: var(--blue); padding: 3px 12px;
-      font-size: .65rem; font-weight: 700;
-      white-space: nowrap; letter-spacing: .04em;
-    }
-    .tl-desc { color: var(--txt2); font-size: .83rem; margin: 10px 0; line-height: 1.75; }
-    .resp-list { list-style: none; margin-top: 10px; }
-    .resp-list li {
-      display: flex; align-items: flex-start; gap: 8px;
-      font-size: .8rem; color: var(--txt2);
-      margin-bottom: 6px; line-height: 1.6;
-    }
-    .resp-list li::before {
-      content: '▹'; color: var(--blue); flex-shrink: 0;
-      font-size: .75rem; line-height: 1.6;
-    }
-    .tech-pills { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 14px; }
-    .tpill {
-      font-family: 'JetBrains Mono', monospace;
-      background: var(--bg3); border: 1px solid var(--bor2);
-      color: var(--cyan); padding: 3px 9px;
-      font-size: .62rem; font-weight: 700;
-    }
-
-    /* ── PROJECTS ── */
-    #projects { background: var(--bg2); border-top: 1px solid var(--bor); border-bottom: 1px solid var(--bor); }
-    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1px; background: var(--bor); border: 1px solid var(--bor); }
-    .proj-card {
-      background: var(--bg2); padding: 24px;
-      position: relative; overflow: hidden; display: flex; flex-direction: column;
-      transition: background .25s;
-    }
-    .proj-card:hover { background: var(--bg3); }
-    .proj-card:hover .proj-num { color: rgba(59,130,246,0.15); }
-    .proj-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 4rem; font-weight: 800;
-      color: rgba(255,255,255,0.03);
-      position: absolute; top: 8px; right: 16px;
-      line-height: 1; transition: color .3s;
-      pointer-events: none;
-    }
-    .proj-icon {
-      width: 38px; height: 38px;
-      background: var(--blue-dim); border: 1px solid var(--blue-glow);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--blue); font-size: .9rem; margin-bottom: 14px; flex-shrink: 0;
-    }
-    .proj-title { font-size: .95rem; font-weight: 800; color: var(--txt); margin-bottom: 4px; }
-    .proj-domain { font-family: 'JetBrains Mono', monospace; font-size: .62rem; color: var(--txt3); margin-bottom: 10px; display: flex; align-items: center; gap: 5px; letter-spacing: .06em; text-transform: uppercase; }
-    .proj-pills { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 12px; }
-    .ppill {
-      font-family: 'JetBrains Mono', monospace;
-      background: var(--bg3); border: 1px solid var(--bor2);
-      color: var(--txt3); padding: 2px 8px; font-size: .6rem; font-weight: 700;
-    }
-    .proj-desc { font-size: .8rem; color: var(--txt2); line-height: 1.7; margin-bottom: 14px; flex: 1; }
-    .proj-resp h5 { font-family: 'JetBrains Mono', monospace; font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; font-weight: 700; }
-
-    /* ── EDUCATION ── */
-    #education { background: var(--bg); }
-    .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: var(--bor); border: 1px solid var(--bor); }
-    .edu-card {
-      background: var(--bg2); padding: 22px; display: flex; gap: 16px;
-      transition: background .25s;
-    }
-    .edu-card:hover { background: var(--bg3); }
-    .edu-icon {
-      width: 42px; height: 42px; flex-shrink: 0;
-      background: var(--bg3); border: 1px solid var(--bor2);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--blue); font-size: 1rem;
-    }
-    .edu-degree { font-size: .88rem; font-weight: 800; color: var(--txt); }
-    .edu-school { font-family: 'JetBrains Mono', monospace; font-size: .65rem; color: var(--txt3); margin: 4px 0; }
-    .edu-meta { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
-    .ebadge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .6rem; font-weight: 700; padding: 2px 8px;
-    }
-    .ebadge.blue { background: var(--blue-dim); border: 1px solid var(--blue-glow); color: var(--blue); }
-    .ebadge.amber { background: var(--amber-dim); border: 1px solid #92400e55; color: var(--amber); }
-
-    /* ── CONTACT ── */
-    #contact { background: var(--bg2); border-top: 1px solid var(--bor); }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-    .contact-heading { font-size: 2rem; font-weight: 800; letter-spacing: -.03em; color: var(--txt); margin-bottom: .8rem; line-height: 1.15; }
-    .contact-heading span { color: var(--blue); }
-    .contact-intro { font-size: .88rem; color: var(--txt2); line-height: 1.8; margin-bottom: 1.8rem; }
-    .contact-links { display: flex; flex-direction: column; gap: 8px; }
-    .clink {
-      display: flex; align-items: center; gap: 14px;
-      padding: 13px 16px;
-      background: var(--bg3); border: 1px solid var(--bor);
-      text-decoration: none; color: var(--txt2);
-      font-size: .82rem; font-weight: 600;
-      transition: all .22s; position: relative; overflow: hidden;
-    }
-    .clink::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--blue); transform: scaleY(0); transform-origin: top; transition: transform .25s; }
-    .clink:hover { border-color: var(--bor2); color: var(--txt); background: var(--bg2); transform: translateX(4px); }
-    .clink:hover::before { transform: scaleY(1); }
-    .clink i { color: var(--blue); width: 18px; text-align: center; flex-shrink: 0; }
-    .clink-label { font-family: 'JetBrains Mono', monospace; font-size: .6rem; text-transform: uppercase; letter-spacing: .1em; color: var(--txt3); display: block; }
-    .clink-val { font-size: .8rem; font-weight: 700; color: var(--txt); }
-
-    /* HIRE BOX */
-    .hire-box {
-      background: var(--bg3); border: 1px solid var(--bor);
-      padding: 40px 32px; text-align: center; position: relative; overflow: hidden;
-    }
-    .hire-box::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, var(--blue), var(--cyan), var(--purple));
-    }
-    .hire-glow {
-      position: absolute; width: 300px; height: 300px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 65%);
-      top: -100px; left: 50%; transform: translateX(-50%);
-      pointer-events: none;
-    }
-    .hire-box i.big { font-size: 2.4rem; color: var(--blue); margin-bottom: 1.2rem; display: block; }
-    .hire-box h3 { font-size: 1.5rem; font-weight: 800; color: var(--txt); margin-bottom: .8rem; }
-    .hire-box p { font-size: .82rem; color: var(--txt2); line-height: 1.75; margin-bottom: 1.8rem; }
-    .hire-btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--blue); color: #fff;
-      padding: 12px 28px;
-      font-family: 'Syne', sans-serif;
-      font-size: .82rem; font-weight: 700; letter-spacing: .04em;
-      text-decoration: none;
-      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
-      transition: all .25s;
-    }
-    .hire-btn:hover { background: #2563eb; box-shadow: 0 0 30px rgba(59,130,246,0.4); }
-    .hire-note { margin-top: 16px; font-family: 'JetBrains Mono', monospace; font-size: .62rem; color: var(--txt3); }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--bg); border-top: 1px solid var(--bor);
-      text-align: center; padding: 24px;
-      font-family: 'JetBrains Mono', monospace; font-size: .68rem; color: var(--txt3);
-    }
-    footer span { color: var(--blue); }
-
-    /* ── FADE ANIMATIONS ── */
-    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
-
-    /* ── DIVIDER ── */
-    .divider { height: 1px; background: var(--bor); margin: 28px 0; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 960px) {
-      .hero-inner { grid-template-columns: 1fr; }
-      .about-grid { grid-template-columns: 1fr; }
-      .skills-layout { grid-template-columns: 1fr; }
-      .contact-grid { grid-template-columns: 1fr; }
-      .hero-stats { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 640px) {
-      .nav-links { display: none; }
-      section { padding: 60px 5%; }
-    }
-  </style>
+  @media (max-width:960px){
+    .hero-inner{grid-template-columns:1fr;}
+    .about-grid{grid-template-columns:1fr;}
+    .skills-layout{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+    .hero-stats{grid-template-columns:repeat(2,1fr);}
+    .edu-lang-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:640px){
+    .nav-links{display:none;}
+    section{padding:60px 5%;}
+    .hero{padding:130px 5% 60px;}
+  }
+</style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <div class="nav-brand">Manoj<span>.</span>Pant</div>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact" class="nav-cta">Hire Me</a></li>
-  </ul>
+  <div class="nav-inner">
+    <div class="nav-brand">Manoj<span>.</span>Pant</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="mailto:manojpant.dev@gmail.com" class="nav-resume">Get in Touch</a></li>
+    </ul>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero" id="hero">
-  <div class="hero-orb1"></div>
-  <div class="hero-orb2"></div>
+  <div class="hero-glow"></div>
   <div class="hero-inner">
-
-    <!-- LEFT -->
     <div class="fade-up">
-      <div class="hero-tag">
-        <span class="pulse-dot"></span>
-        Open to Freelance Opportunities
-      </div>
-      <h1>
-        Full Stack<br>
-        <span class="accent">.NET</span> Developer<br>
-        <span class="dim">&amp; Freelancer</span>
-      </h1>
-
-      <div class="hero-mono">
-        <span class="key">Role</span> : <span class="str">"Lead Software Engineer"</span><br>
-        <span class="key">Stack</span> : <span class="val">[Blazor, ASP.NET Core, Web API, Docker]</span><br>
-        <span class="key">Location</span> : <span class="str">"Delhi, India"</span><br>
-        <span class="key">Status</span> : <span class="str" style="color:var(--green)">"Available for Projects"</span>
-      </div>
-
+      <div class="hero-tag"><span class="pulse-dot"></span> Open to New Opportunities</div>
+      <h1>Manoj Pant</h1>
+      <div class="role">Full Stack .NET Developer</div>
       <p class="hero-desc">
-        <strong>Passionate about building secure, scalable web applications</strong> using the latest .NET technologies.
-        From clean architecture to real-time deployment — I deliver end-to-end solutions with
-        security-first practices, CQRS patterns, and pixel-perfect results.
+        <strong>Associate Application Developer</strong> with 1.5+ years of professional experience and 4+ years of hands-on
+        work across the .NET ecosystem. I build secure, scalable web applications with C#, Blazor, ASP.NET Core and SQL Server —
+        including <strong>mission-critical systems for the Ministry of Defence</strong>, built to government compliance and
+        security standards.
       </p>
-
       <div class="hero-btns">
-        <a href="#projects" class="btn-primary"><i class="fas fa-rocket"></i> View Projects</a>
-        <a href="#contact" class="btn-outline"><i class="fas fa-paper-plane"></i> Hire Me</a>
+        <a href="#experience" class="btn-primary"><i class="fas fa-briefcase"></i> View Experience</a>
+        <a href="#contact" class="btn-outline"><i class="fas fa-paper-plane"></i> Get in Touch</a>
       </div>
-
       <div class="hero-stats">
-        <div class="stat-item" style="--d:0s">
-          <span class="stat-num">3+</span>
-          <div class="stat-label">Yrs Experience</div>
-        </div>
-        <div class="stat-item" style="--d:.1s">
-          <span class="stat-num">30+</span>
-          <div class="stat-label">Projects Done</div>
-        </div>
-        <div class="stat-item" style="--d:.2s">
-          <span class="stat-num">.NET 8</span>
-          <div class="stat-label">Latest Stack</div>
-        </div>
-        <div class="stat-item" style="--d:.3s">
-          <span class="stat-num">100%</span>
-          <div class="stat-label">Satisfaction</div>
-        </div>
+        <div class="stat-item"><span class="stat-num">1.5+</span><div class="stat-label">Yrs Professional</div></div>
+        <div class="stat-item"><span class="stat-num">4+</span><div class="stat-label">Yrs Hands-on Coding</div></div>
+        <div class="stat-item"><span class="stat-num">.NET 6–10</span><div class="stat-label">Stack Coverage</div></div>
+        <div class="stat-item"><span class="stat-num">2</span><div class="stat-label">MoD Deliveries</div></div>
       </div>
     </div>
 
-    <!-- RIGHT CARD -->
-    <div class="hero-card fade-up" style="transition-delay:.18s">
+    <div class="hero-card fade-up" style="transition-delay:.15s">
       <div class="hc-header">
         <div class="hc-dots">
-          <div class="hc-dot" style="background:#ef4444"></div>
-          <div class="hc-dot" style="background:#f59e0b"></div>
-          <div class="hc-dot" style="background:#22c55e"></div>
+          <div class="hc-dot" style="background:#EF4444"></div>
+          <div class="hc-dot" style="background:#F59E0B"></div>
+          <div class="hc-dot" style="background:#10B981"></div>
         </div>
-        <div class="hc-title">dev-profile.json</div>
+        <div class="hc-title">profile.card</div>
       </div>
-
       <div class="avatar-row">
         <div class="avatar">MP</div>
         <div>
           <div class="card-name">Manoj Pant</div>
-          <div class="card-role"> Full Stack .NET Developer</div>
-          <div class="card-loc"><i class="fas fa-map-marker-alt" style="color:var(--blue)"></i> Delhi, India</div>
-          <div class="status-badge"><span></span> AVAILABLE FOR PROJECTS</div>
+          <div class="card-role">Full Stack .NET Developer</div>
+          <div class="card-loc"><i class="fas fa-map-marker-alt"></i> Delhi, India</div>
+          <div class="status-badge"><span></span> AVAILABLE FOR OPPORTUNITIES</div>
         </div>
       </div>
-
       <div class="info-list">
         <div class="info-item">
           <div class="info-icon"><i class="fas fa-envelope"></i></div>
-          <div>
-            <span class="info-label">Email</span>
-            <div class="info-val"><a href="mailto:pantmanoj2005@gmail.com">pantmanoj2005@gmail.com</a></div>
-          </div>
+          <div><span class="info-label">Email</span><div class="info-val"><a href="mailto:manojpant.dev@gmail.com">manojpant.dev@gmail.com</a></div></div>
         </div>
         <div class="info-item">
           <div class="info-icon"><i class="fas fa-phone"></i></div>
-          <div>
-            <span class="info-label">Phone</span>
-            <div class="info-val"><a href="tel:+919258029267">+91 9258029267</a></div>
-          </div>
+          <div><span class="info-label">Phone</span><div class="info-val"><a href="tel:+919258029267">+91 9258029267</a></div></div>
         </div>
         <div class="info-item">
           <div class="info-icon"><i class="fab fa-linkedin"></i></div>
-          <div>
-            <span class="info-label">LinkedIn</span>
-            <div class="info-val"><a href="https://www.linkedin.com/in/manoj-pant-90628824b/" target="_blank">manoj-pant-90628824b</a></div>
-          </div>
+          <div><span class="info-label">LinkedIn</span><div class="info-val"><a href="https://www.linkedin.com/in/manoj-pant-90628824b/" target="_blank">manoj-pant-90628824b</a></div></div>
         </div>
         <div class="info-item">
           <div class="info-icon"><i class="fab fa-github"></i></div>
-          <div>
-            <span class="info-label">GitHub</span>
-            <div class="info-val"><a href="https://github.com/ManojPant2005" target="_blank">ManojPant2005</a></div>
-          </div>
+          <div><span class="info-label">GitHub</span><div class="info-val"><a href="https://github.com/ManojPant2005" target="_blank">ManojPant2005</a></div></div>
         </div>
       </div>
-
       <div class="hc-skills">
-        <div class="hcs-label"> Core Technologies</div>
+        <div class="hcs-label">Core Technologies</div>
         <div class="hcs-chips">
           <span class="hcs-chip">Blazor</span>
           <span class="hcs-chip">ASP.NET Core</span>
-          <span class="hcs-chip">Web API</span>
+          <span class="hcs-chip">C#</span>
           <span class="hcs-chip">EF Core</span>
           <span class="hcs-chip">SQL Server</span>
-          <span class="hcs-chip">Docker</span>
+          <span class="hcs-chip">.NET MAUI</span>
         </div>
       </div>
     </div>
@@ -805,95 +429,37 @@
 <!-- ABOUT -->
 <section id="about">
   <div class="container">
-    <div class="sec-tag fade-up">01 — Professional Profile</div>
-    <h2 class="sec-title fade-up">Who I Am</h2>
+    <div class="sec-tag fade-up">About</div>
+    <h2 class="sec-title fade-up">Professional Summary</h2>
     <div class="about-grid">
       <div class="fade-up">
         <div class="about-text">
-          <p>I am a <strong>passionate Full-Stack .NET Developer</strong> with a focus on building secure and scalable web applications. Experienced in developing end-to-end solutions using modern .NET technologies and following clean coding practices.</p>
-          <p>Skilled in implementing the <strong>CQRS pattern</strong>, managing projects from start to deployment, and collaborating effectively within teams to deliver real-world, production-grade applications.</p>
-          <p>I have completed <strong>30+ projects</strong> during my internship and professional career, focusing on creating efficient, user-friendly, and maintainable web applications. Always eager to learn, improve, and contribute to impactful software development.</p>
-        </div>
-        <div style="margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--txt3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px"> Proficient In</div>
-        <div class="proficiency-grid">
-          <div class="prof-item"><i class="fas fa-check"></i> C# · .NET Core · MVC</div>
-          <div class="prof-item"><i class="fas fa-check"></i> Blazor · WinForms · MAUI</div>
-          <div class="prof-item"><i class="fas fa-check"></i> SQL · T-SQL · Oracle PL/SQL</div>
-          <div class="prof-item"><i class="fas fa-check"></i> EF Core · ADO.NET</div>
-          <div class="prof-item"><i class="fas fa-check"></i> Web APIs · Windows Services</div>
-          <div class="prof-item"><i class="fas fa-check"></i> JavaScript · Bootstrap</div>
-          <div class="prof-item"><i class="fas fa-check"></i> Docker · Microservices</div>
-          <div class="prof-item"><i class="fas fa-check"></i> Git · Agile Practices</div>
+          <p>I'm a <strong>results-driven Full Stack .NET Developer</strong> with a strong foundation in enterprise-grade web development, secure application design, and cross-functional team collaboration.</p>
+          <p>Currently working as an <strong>Associate Application Developer at Createch Softwares</strong>, where I build and maintain applications using Blazor (Server &amp; WebAssembly), ASP.NET Core, .NET MAUI and RESTful Web APIs — including security-first systems delivered to the Ministry of Defence.</p>
+          <p>I consistently apply modern design patterns — <strong>Repository, Factory, and CQRS</strong> — alongside SOLID principles, to write clean, maintainable code that scales. Outside of core .NET work, I collaborate closely with Angular, Docker, and Node.js teams, and I'm actively deepening my own skills in both.</p>
         </div>
       </div>
-      <div class="fade-up" style="transition-delay:.12s">
+      <div class="fade-up" style="transition-delay:.1s">
+        <div class="highlight-box">
+          <h4><i class="fas fa-shield-halved"></i> Security-First Development</h4>
+          <p>Contributed to government-grade applications with penetration-testing awareness, cybersecurity guideline compliance, RBAC, JWT authentication, and secure document handling for official correspondence.</p>
+        </div>
         <div class="highlight-box">
           <h4><i class="fas fa-sitemap"></i> Architecture &amp; Patterns</h4>
-          <p>I design systems with maintainability in mind — applying industry-standard patterns that make codebases easy to extend and scale over time.</p>
+          <p>Clean Architecture, CQRS, N-Tier and Microservices applied across production projects, with a focus on maintainable and testable codebases.</p>
           <div class="chip-row">
-            <span class="chip">CQRS Pattern</span>
             <span class="chip">Clean Architecture</span>
-            <span class="chip">SOLID Principles</span>
+            <span class="chip">CQRS</span>
+            <span class="chip">N-Tier</span>
             <span class="chip">Microservices</span>
             <span class="chip">Repository Pattern</span>
-            <span class="chip">Design Patterns</span>
+            <span class="chip">SOLID</span>
           </div>
         </div>
-        <div class="highlight-box" style="--left-color:var(--cyan)">
-          <h4 style=""><i class="fas fa-shield-halved" style="color:var(--cyan)"></i> Security &amp; Best Practices</h4>
-          <p>Every application I build is secured end-to-end — JWT authentication, role-based access control, input validation, SQL injection prevention, and OWASP compliance built into every layer.</p>
-        </div>
         <div class="highlight-box">
-          <h4><i class="fas fa-users-gear" style="color:var(--green)"></i> Internship — Rapid IT Solutions</h4>
-          <p>Completed a 6-month hands-on internship focused on modern .NET technologies. Worked with Blazor, Web APIs, EF Core, and Microservices architecture following Agile practices with code reviews and version control.</p>
+          <h4><i class="fas fa-people-group"></i> Client &amp; Team Collaboration</h4>
+          <p>Direct client engagement for requirement gathering, sprint planning and end-to-end delivery — working alongside Angular, Docker, MySQL and PostgreSQL teams.</p>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section id="services">
-  <div class="container">
-    <div class="sec-tag fade-up">02 — What I Offer</div>
-    <h2 class="sec-title fade-up">Freelance Services</h2>
-    <p class="sec-sub fade-up">End-to-end application delivery — from requirement gathering to production deployment — with quality and security guaranteed.</p>
-    <div class="services-grid">
-      <div class="service-card fade-up">
-        <div class="svc-num">01 / 06</div>
-        <div class="svc-icon"><i class="fas fa-fire-flame-curved"></i></div>
-        <div class="svc-title">Blazor Web Applications</div>
-        <div class="svc-desc">Full-stack Blazor Server and WebAssembly apps with rich UI components, real-time features, and seamless API integration.</div>
-      </div>
-      <div class="service-card fade-up" style="transition-delay:.07s">
-        <div class="svc-num">02 / 06</div>
-        <div class="svc-icon"><i class="fas fa-plug-circle-bolt"></i></div>
-        <div class="svc-title">ASP.NET Core &amp; Web API</div>
-        <div class="svc-desc">RESTful APIs with Minimal API support, Swagger/OpenAPI documentation, JWT auth, and complete backend integration.</div>
-      </div>
-      <div class="service-card fade-up" style="transition-delay:.14s">
-        <div class="svc-num">03 / 06</div>
-        <div class="svc-icon"><i class="fas fa-shield-halved"></i></div>
-        <div class="svc-title">Security-First Development</div>
-        <div class="svc-desc">OWASP compliance, JWT tokens, role-based access, SQL injection prevention, and input sanitisation built into every layer.</div>
-      </div>
-      <div class="service-card fade-up" style="transition-delay:.07s">
-        <div class="svc-num">04 / 06</div>
-        <div class="svc-icon"><i class="fas fa-layer-group"></i></div>
-        <div class="svc-title">Clean Architecture &amp; CQRS</div>
-        <div class="svc-desc">SOLID principles, CQRS pattern, separation of concerns — scalable and maintainable codebases designed to last.</div>
-      </div>
-      <div class="service-card fade-up" style="transition-delay:.14s">
-        <div class="svc-num">05 / 06</div>
-        <div class="svc-icon"><i class="fas fa-database"></i></div>
-        <div class="svc-title">Database Design &amp; Optimisation</div>
-        <div class="svc-desc">Complex stored procedures, EF Core migrations, query optimisation across MS SQL, Oracle, and MySQL.</div>
-      </div>
-      <div class="service-card fade-up" style="transition-delay:.21s">
-        <div class="svc-num">06 / 06</div>
-        <div class="svc-icon"><i class="fas fa-server"></i></div>
-        <div class="svc-title">Windows Services &amp; Background Jobs</div>
-        <div class="svc-desc">Scheduled background processing, data archiving, automated event monitoring with error recovery and zero-downtime operation.</div>
       </div>
     </div>
   </div>
@@ -902,91 +468,62 @@
 <!-- SKILLS -->
 <section id="skills">
   <div class="container">
-    <div class="sec-tag fade-up">03 — Technical Expertise</div>
-    <h2 class="sec-title fade-up">Skills &amp; Technologies</h2>
-    <p class="sec-sub fade-up">A comprehensive toolkit built through real-world projects, continuous learning, and production delivery.</p>
+    <div class="sec-tag fade-up">Skills</div>
+    <h2 class="sec-title fade-up">Technical Skills</h2>
+    <p class="sec-sub fade-up">A toolkit built through production delivery, government-grade applications, and continuous, honest self-assessment of what's core vs. what I'm still growing into.</p>
     <div class="skills-layout">
       <div>
         <div class="skill-cat fade-up">
           <div class="skill-cat-title"><i class="fas fa-code"></i> Languages</div>
           <div class="skill-tags">
-            <span class="tag">C#</span><span class="tag">PL-SQL / T-SQL</span><span class="tag">JavaScript</span><span class="tag">HTML5 / CSS3</span>
+            <span class="tag">C#</span><span class="tag">PL-SQL / T-SQL</span><span class="tag">HTML5 / CSS3</span>
           </div>
         </div>
         <div class="skill-cat fade-up">
-          <div class="skill-cat-title"><i class="fas fa-cubes"></i> Frameworks &amp; Libraries</div>
+          <div class="skill-cat-title"><i class="fas fa-cubes"></i> Frameworks</div>
           <div class="skill-tags">
-            <span class="tag">.NET Core 6/7/8</span><span class="tag">.NET Framework 4.8</span><span class="tag">Blazor</span><span class="tag">ASP.NET Core MVC</span><span class="tag">Web API / Minimal API</span><span class="tag">Angular</span><span class="tag">.NET MAUI</span><span class="tag">WinForms</span><span class="tag">EF Core</span><span class="tag">ADO.NET</span>
+            <span class="tag">.NET 6 / 7 / 8 / 10</span><span class="tag">Blazor Server</span><span class="tag">Blazor WebAssembly</span><span class="tag">ASP.NET Core MVC</span><span class="tag">.NET MAUI</span><span class="tag">Web API</span><span class="tag">Blazorise</span><span class="tag">Bootstrap</span>
+          </div>
+        </div>
+        <div class="skill-cat fade-up">
+          <div class="skill-cat-title"><i class="fas fa-sitemap"></i> Architecture</div>
+          <div class="skill-tags">
+            <span class="tag accent">Clean Architecture</span><span class="tag accent">CQRS</span><span class="tag accent">N-Tier</span><span class="tag accent">Microservices</span><span class="tag accent">Repository Pattern</span><span class="tag accent">SOLID Principles</span>
           </div>
         </div>
         <div class="skill-cat fade-up">
           <div class="skill-cat-title"><i class="fas fa-database"></i> Databases</div>
           <div class="skill-tags">
-            <span class="tag">MS SQL Server</span><span class="tag">Oracle</span><span class="tag">MySQL</span>
+            <span class="tag">SQL Server</span><span class="tag">Oracle</span><span class="tag">MySQL</span><span class="tag">PostgreSQL</span>
           </div>
         </div>
         <div class="skill-cat fade-up">
-          <div class="skill-cat-title"><i class="fas fa-cloud"></i> DevOps &amp; Infra</div>
+          <div class="skill-cat-title"><i class="fas fa-toolbox"></i> Tools &amp; DevOps</div>
           <div class="skill-tags">
-            <span class="tag">Git &amp; GitHub</span><span class="tag">Docker</span><span class="tag">Microservices</span><span class="tag">Windows Services</span>
+            <span class="tag">Git &amp; GitHub</span><span class="tag">Docker</span><span class="tag">Visual Studio</span><span class="tag">VS Code</span><span class="tag">Windows</span><span class="tag">Linux</span>
           </div>
         </div>
         <div class="skill-cat fade-up">
-          <div class="skill-cat-title"><i class="fas fa-star"></i> Patterns &amp; Architecture</div>
+          <div class="skill-cat-title"><i class="fas fa-key"></i> Other</div>
           <div class="skill-tags">
-            <span class="tag accent">Clean Architecture</span><span class="tag accent">CQRS Pattern</span><span class="tag accent">SOLID Principles</span><span class="tag accent">Repository Pattern</span><span class="tag accent">Design Patterns</span><span class="tag accent">Agile / Scrum</span>
+            <span class="tag">JWT Auth</span><span class="tag">RBAC</span><span class="tag">EF Core</span><span class="tag">REST APIs</span>
           </div>
         </div>
       </div>
-      <div class="fade-up tech-visual">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--txt3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px"> Core Stack Proficiency</div>
-        <div class="tech-item">
-          <i class="fas fa-fire-flame-curved"></i>
-          <span class="tech-name">Blazor</span>
-          <div class="tech-bar-wrap"><div class="tech-bar" style="width:0" data-width="91%"></div></div>
-          <span class="tech-pct">91%</span>
+
+      <div class="fade-up" style="transition-delay:.1s">
+        <div class="learning-box">
+          <h4><i class="fas fa-seedling"></i> Currently Learning</h4>
+          <p>Actively building learning projects to strengthen these alongside my core .NET work, and comfortable collaborating on them in a team setting today.</p>
+          <div class="learning-tags">
+            <span class="ltag"><i class="fab fa-angular"></i> Angular</span>
+            <span class="ltag"><i class="fab fa-node-js"></i> Node.js</span>
+          </div>
         </div>
-        <div class="tech-item">
-          <i class="fas fa-server"></i>
-          <span class="tech-name">ASP.NET Core</span>
-          <div class="tech-bar-wrap"><div class="tech-bar" style="width:0" data-width="87%"></div></div>
-          <span class="tech-pct">87%</span>
-        </div>
-        <div class="tech-item">
-          <i class="fas fa-plug"></i>
-          <span class="tech-name">Web API</span>
-          <div class="tech-bar-wrap"><div class="tech-bar" style="width:0" data-width="89%"></div></div>
-          <span class="tech-pct">89%</span>
-        </div>
-        <div class="tech-item">
-          <i class="fas fa-database"></i>
-          <span class="tech-name">SQL Server</span>
-          <div class="tech-bar-wrap"><div class="tech-bar" style="width:0" data-width="84%"></div></div>
-          <span class="tech-pct">84%</span>
-        </div>
-        <div class="tech-item">
-          <i class="fab fa-angular"></i>
-          <span class="tech-name">Angular</span>
-          <div class="tech-bar-wrap"><div class="tech-bar" style="width:0" data-width="72%"></div></div>
-          <span class="tech-pct">72%</span>
-        </div>
-        <div class="tech-item">
-          <i class="fab fa-docker"></i>
-          <span class="tech-name">Docker</span>
-          <div class="tech-bar-wrap"><div class="tech-bar" style="width:0" data-width="68%"></div></div>
-          <span class="tech-pct">68%</span>
-        </div>
-        <div class="tech-item">
-          <i class="fas fa-sitemap"></i>
-          <span class="tech-name">Clean Arch / CQRS</span>
-          <div class="tech-bar-wrap"><div class="tech-bar" style="width:0" data-width="82%"></div></div>
-          <span class="tech-pct">82%</span>
-        </div>
-        <div class="tech-item">
-          <i class="fab fa-git-alt"></i>
-          <span class="tech-name">Git</span>
-          <div class="tech-bar-wrap"><div class="tech-bar" style="width:0" data-width="80%"></div></div>
-          <span class="tech-pct">80%</span>
+        <div class="cred-box">
+          <h4><i class="fas fa-language"></i> Languages Spoken</h4>
+          <div class="lang-item"><span>Hindi</span><span class="lang-level">NATIVE</span></div>
+          <div class="lang-item"><span>English</span><span class="lang-level">CONVERSATIONAL</span></div>
         </div>
       </div>
     </div>
@@ -996,9 +533,9 @@
 <!-- EXPERIENCE -->
 <section id="experience">
   <div class="container">
-    <div class="sec-tag fade-up">04 — Career Journey</div>
+    <div class="sec-tag fade-up">Experience</div>
     <h2 class="sec-title fade-up">Work Experience</h2>
-    <p class="sec-sub fade-up">Real-world development experience building production-grade, secure applications from scratch.</p>
+    <p class="sec-sub fade-up">Real-world development experience building production-grade, secure applications — including government systems used by the Ministry of Defence.</p>
     <div class="timeline">
 
       <div class="tl-item fade-up">
@@ -1006,23 +543,20 @@
         <div class="tl-card">
           <div class="tl-header">
             <div>
-              <div class="tl-title">Lead Software Engineer — Full Stack .NET</div>
+              <div class="tl-title">Associate Application Developer</div>
               <div class="tl-company"><i class="fas fa-building"></i> Createch Softwares Pvt. Ltd., Delhi</div>
             </div>
             <div class="tl-date">Dec 2024 — Present</div>
           </div>
-          <p class="tl-desc">Working full-time as a Full Stack .NET Developer, building and maintaining production web applications across multiple domains. Responsible for end-to-end delivery — architecture, development, testing, and deployment.</p>
+          <p class="tl-desc">Working as a Full Stack .NET Developer, building and maintaining enterprise web applications using Blazor (Server &amp; WebAssembly), ASP.NET Core, .NET MAUI, and RESTful Web APIs.</p>
           <ul class="resp-list">
-            <li>Building full-stack web apps with Blazor, Angular, ASP.NET Core MVC, and Web API</li>
-            <li>Implementing CQRS pattern and Clean Architecture across all new projects</li>
-            <li>Developing .NET MAUI for cross-platform desktop and mobile solutions</li>
-            <li>Integrating JWT authentication, role-based access, and security best practices</li>
-            <li>Writing optimised stored procedures and EF Core database migrations</li>
-            <li>Containerising services with Docker and Microservices architecture</li>
-            <li>Collaborating with cross-functional teams in an Agile environment</li>
+            <li>Led security-first development for Ministry of Defence applications — followed penetration testing guidelines, cybersecurity directives and secure testing protocols to meet government compliance standards</li>
+            <li>Applied Clean Architecture, CQRS and SOLID principles across all projects for maintainable, testable, scalable codebases</li>
+            <li>Collaborated with cross-functional teams working across Blazor, Angular, Docker, MySQL and PostgreSQL — gaining working familiarity with Node.js during integrations</li>
+            <li>Engaged directly with clients for requirement gathering, sprint planning and end-to-end solution delivery</li>
           </ul>
           <div class="tech-pills">
-            <span class="tpill">Blazor</span><span class="tpill">Angular</span><span class="tpill">.NET 8</span><span class="tpill">MAUI</span><span class="tpill">Web API</span><span class="tpill">Docker</span><span class="tpill">EF Core</span><span class="tpill">CQRS</span><span class="tpill">Microservices</span>
+            <span class="tpill">Blazor</span><span class="tpill">ASP.NET Core</span><span class="tpill">.NET MAUI</span><span class="tpill">Web API</span><span class="tpill">CQRS</span><span class="tpill">Docker</span><span class="tpill">Angular (collab)</span>
           </div>
         </div>
       </div>
@@ -1032,20 +566,18 @@
         <div class="tl-card">
           <div class="tl-header">
             <div>
-              <div class="tl-title">.NET Developer Intern</div>
+              <div class="tl-title">Software Developer Intern</div>
               <div class="tl-company"><i class="fas fa-building"></i> Rapid IT Solutions</div>
             </div>
-            <div class="tl-date">6 Months</div>
+            <div class="tl-date">Jun 2024 — Nov 2024 · 6 Months</div>
           </div>
-          <p class="tl-desc">Completed a hands-on internship focused on real-time project development with modern .NET technologies. Worked within an Agile team with regular code reviews and version control practices.</p>
+          <p class="tl-desc">Hands-on internship building real-time projects with Blazor and Web API, gaining full-stack .NET development experience from scratch.</p>
           <ul class="resp-list">
-            <li>Developed multiple full applications using Blazor and Web API from scratch</li>
-            <li>Applied Microservices architecture and EF Core ORM in live projects</li>
-            <li>Participated in Agile sprints, code reviews, and daily standups</li>
-            <li>Used Git for version control and collaborated within a team environment</li>
+            <li>Migrated multiple legacy desktop applications (WPF, Windows Forms, Web Forms) to modern Blazor and ASP.NET Core MVC platforms</li>
+            <li>Developed RESTful APIs for user authentication, registration and order management across multiple client projects</li>
           </ul>
           <div class="tech-pills">
-            <span class="tpill">Blazor</span><span class="tpill">Web API</span><span class="tpill">.NET Core</span><span class="tpill">EF Core</span><span class="tpill">SQL Server</span><span class="tpill">Microservices</span><span class="tpill">Agile</span>
+            <span class="tpill">Blazor</span><span class="tpill">Web API</span><span class="tpill">.NET Core</span><span class="tpill">EF Core</span><span class="tpill">SQL Server</span>
           </div>
         </div>
       </div>
@@ -1057,121 +589,83 @@
 <!-- PROJECTS -->
 <section id="projects">
   <div class="container">
-    <div class="sec-tag fade-up">05 — Portfolio</div>
+    <div class="sec-tag fade-up">Projects</div>
     <h2 class="sec-title fade-up">Project Highlights</h2>
-    <p class="sec-sub fade-up">Real-world projects delivered across multiple domains — hospital management, e-commerce, enterprise APIs, hospitality, and more.</p>
+    <p class="sec-sub fade-up">A selection of production and self-initiated projects, including two secure platforms built for the Ministry of Defence.</p>
     <div class="projects-grid">
 
       <div class="proj-card fade-up">
-        <div class="proj-num">01</div>
-        <div class="proj-icon"><i class="fas fa-server"></i></div>
-        <div class="proj-title">Database Archiving Windows Service</div>
+        <div class="proj-top">
+          <div class="proj-icon"><i class="fas fa-server"></i></div>
+          <div class="proj-badge">Self-Initiated</div>
+        </div>
+        <div class="proj-title">Database Archiving Service</div>
         <div class="proj-domain"><i class="fas fa-industry"></i> Enterprise / Infrastructure</div>
-        <div class="proj-pills">
-          <span class="ppill">Windows Service</span><span class="ppill">.NET Framework</span><span class="ppill">SQL Server</span>
-        </div>
-        <p class="proj-desc">A 24/7 background Windows Service that monitors system events, performs scheduled database archiving, and includes automatic error-handling and self-recovery for zero-downtime enterprise operation.</p>
+        <div class="proj-pills"><span class="ppill">.NET 6</span><span class="ppill">Blazor Server</span><span class="ppill">Windows Hosted Service</span><span class="ppill">Clean Architecture</span></div>
+        <p class="proj-desc">A production-grade Windows Hosted Service with a Blazor admin UI, running automated database archiving every 30 minutes across SQL Server, Oracle and MySQL.</p>
         <div class="proj-resp">
-          <h5> Key Contributions</h5>
+          <h5>Key Contributions</h5>
           <ul class="resp-list">
-            <li>Designed continuous service with scheduled task execution</li>
-            <li>Built automated error recovery and alerting mechanisms</li>
-            <li>Archived data for analytics and compliance reporting</li>
+            <li>Built IHostedService background processor with graceful lifecycle management via Cancellation Tokens</li>
+            <li>Built Blazor UI to start, stop and restart the service directly from the browser</li>
+            <li>Added dynamic multi-database table configuration with full error recovery</li>
           </ul>
         </div>
       </div>
 
-      <div class="proj-card fade-up" style="transition-delay:.07s">
-        <div class="proj-num">02</div>
-        <div class="proj-icon"><i class="fas fa-hospital"></i></div>
-        <div class="proj-title">Real-Time Hospital Management System</div>
-        <div class="proj-domain"><i class="fas fa-stethoscope"></i> Healthcare Domain</div>
-        <div class="proj-pills">
-          <span class="ppill">Blazor</span><span class="ppill">.NET 8</span><span class="ppill">EF Core</span><span class="ppill">MS SQL</span><span class="ppill">Docker</span><span class="ppill">Microservices</span>
+      <div class="proj-card fade-up" style="transition-delay:.06s">
+        <div class="proj-top">
+          <div class="proj-icon"><i class="fas fa-shield"></i></div>
+          <div class="proj-badge gov">Ministry of Defence</div>
         </div>
-        <p class="proj-desc">Full-stack hospital management system with SOLID principles and CQRS design patterns. Separate microservices for authentication, patient bookings, room management, and real-time dashboards.</p>
+        <div class="proj-title">Campus Management Software (CMS)</div>
+        <div class="proj-domain"><i class="fas fa-graduation-cap"></i> Client: Army War College, Mhow</div>
+        <div class="proj-pills"><span class="ppill">Blazor .NET 10</span><span class="ppill">ASP.NET Core</span><span class="ppill">CQRS</span><span class="ppill">Docker</span><span class="ppill">Microservices</span></div>
+        <p class="proj-desc">A secure campus management system enabling army officers to access courses, training schedules and institutional resources through a centralized platform.</p>
         <div class="proj-resp">
-          <h5> Key Contributions</h5>
+          <h5>Key Contributions</h5>
           <ul class="resp-list">
-            <li>Designed microservice APIs for user auth and patient booking</li>
-            <li>Built Blazor components with Blazorise grids and charts</li>
-            <li>Containerised services with Docker for scalable deployment</li>
+            <li>Designed separate microservices for officer authentication, courses and training workflows</li>
+            <li>Implemented RBAC for multiple user roles in a Ministry of Defence environment</li>
+            <li>Built reusable Blazor components with Blazorise grids, charts and dashboards</li>
           </ul>
         </div>
       </div>
 
-      <div class="proj-card fade-up" style="transition-delay:.14s">
-        <div class="proj-num">03</div>
-        <div class="proj-icon"><i class="fas fa-arrow-right-arrow-left"></i></div>
+      <div class="proj-card fade-up" style="transition-delay:.12s">
+        <div class="proj-top">
+          <div class="proj-icon"><i class="fas fa-arrow-right-arrow-left"></i></div>
+          <div class="proj-badge">Migration</div>
+        </div>
         <div class="proj-title">Desktop to Web Application Migration</div>
-        <div class="proj-domain"><i class="fas fa-cart-shopping"></i> E-Commerce / SaaS</div>
-        <div class="proj-pills">
-          <span class="ppill">Blazor</span><span class="ppill">.NET 7</span><span class="ppill">EF Core</span><span class="ppill">MySQL</span><span class="ppill">Docker</span>
-        </div>
-        <p class="proj-desc">Migrated a legacy desktop application to a modern Blazor web app. Users can now order, manage data, and authenticate from any browser — with local storage management and full user profiles.</p>
+        <div class="proj-domain"><i class="fas fa-desktop"></i> Legacy Modernization</div>
+        <div class="proj-pills"><span class="ppill">.NET 7</span><span class="ppill">Blazor</span><span class="ppill">EF Core</span><span class="ppill">MySQL</span><span class="ppill">Docker</span></div>
+        <p class="proj-desc">Migrated a legacy Windows Forms / Web Forms desktop application to a modern Blazor web platform, improving accessibility and maintainability.</p>
         <div class="proj-resp">
-          <h5> Key Contributions</h5>
+          <h5>Key Contributions</h5>
           <ul class="resp-list">
-            <li>Implemented local storage, auth, registration, and order APIs</li>
-            <li>Developed responsive Blazor UI with Blazorise components</li>
-            <li>Managed full client coordination from design to delivery</li>
+            <li>Designed RESTful APIs for authentication, registration and order management</li>
+            <li>Implemented secure session and role-based authorization</li>
+            <li>Coordinated with the client across the full migration lifecycle</li>
           </ul>
         </div>
       </div>
 
-      <div class="proj-card fade-up" style="transition-delay:.07s">
-        <div class="proj-num">04</div>
-        <div class="proj-icon"><i class="fas fa-hotel"></i></div>
-        <div class="proj-title">Hotel &amp; Hospitality Management Platform</div>
-        <div class="proj-domain"><i class="fas fa-concierge-bell"></i> Hospitality Domain</div>
-        <div class="proj-pills">
-          <span class="ppill">Blazor</span><span class="ppill">.NET 8</span><span class="ppill">ASP.NET Core</span><span class="ppill">EF Core</span><span class="ppill">SQL Server</span><span class="ppill">Web API</span>
+      <div class="proj-card fade-up" style="transition-delay:.18s">
+        <div class="proj-top">
+          <div class="proj-icon"><i class="fas fa-file-shield"></i></div>
+          <div class="proj-badge gov">Ministry of Defence</div>
         </div>
-        <p class="proj-desc">A comprehensive hospitality management solution covering room booking, guest check-in/check-out, housekeeping workflows, billing, and real-time availability dashboards — built with full Clean Architecture.</p>
+        <div class="proj-title">DGR Portal — Directorate General Resettlement</div>
+        <div class="proj-domain"><i class="fas fa-flag"></i> Tri-Service Web Portal</div>
+        <div class="proj-pills"><span class="ppill">Blazor Server</span><span class="ppill">.NET Core MVC</span><span class="ppill">CQRS</span><span class="ppill">SQL Server</span><span class="ppill">RBAC</span></div>
+        <p class="proj-desc">A large-scale, high-security portal serving ex-servicemen across Army, Navy and Air Force for government scheme applications and resettlement services.</p>
         <div class="proj-resp">
-          <h5> Key Contributions</h5>
+          <h5>Key Contributions</h5>
           <ul class="resp-list">
-            <li>Developed room reservation, availability, and pricing APIs</li>
-            <li>Built interactive guest management and billing dashboards in Blazor</li>
-            <li>Implemented role-based access for admin, staff, and front-desk users</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="proj-card fade-up" style="transition-delay:.14s">
-        <div class="proj-num">05</div>
-        <div class="proj-icon"><i class="fas fa-bag-shopping"></i></div>
-        <div class="proj-title">E-Commerce Platform — Shopify &amp; Razorpay</div>
-        <div class="proj-domain"><i class="fas fa-store"></i> E-Commerce &amp; Payments</div>
-        <div class="proj-pills">
-          <span class="ppill">ASP.NET Core</span><span class="ppill">Blazor</span><span class="ppill">Shopify API</span><span class="ppill">Razorpay</span><span class="ppill">.NET 8</span><span class="ppill">MySQL</span>
-        </div>
-        <p class="proj-desc">Full-stack e-commerce platform with Shopify storefront integration and Razorpay payment gateway. Features include product catalogue, cart management, secure checkout, order tracking, and admin reporting.</p>
-        <div class="proj-resp">
-          <h5> Key Contributions</h5>
-          <ul class="resp-list">
-            <li>Integrated Shopify API for product sync, inventory, and order management</li>
-            <li>Implemented Razorpay payment gateway with webhook handling and refunds</li>
-            <li>Built secure checkout flow with input validation and fraud prevention</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="proj-card fade-up" style="transition-delay:.21s">
-        <div class="proj-num">06</div>
-        <div class="proj-icon"><i class="fas fa-code-branch"></i></div>
-        <div class="proj-title">.NET Minimal API — OpenAPI Backend</div>
-        <div class="proj-domain"><i class="fas fa-network-wired"></i> API Development</div>
-        <div class="proj-pills">
-          <span class="ppill">Minimal API</span><span class="ppill">.NET 8</span><span class="ppill">OpenAPI/Swagger</span><span class="ppill">JWT Auth</span><span class="ppill">EF Core</span><span class="ppill">SQL Server</span>
-        </div>
-        <p class="proj-desc">High-performance backend using .NET 8 Minimal APIs with complete OpenAPI/Swagger documentation. Includes JWT authentication, role-based authorization, rate limiting, global error handling, and third-party API integrations.</p>
-        <div class="proj-resp">
-          <h5> Key Contributions</h5>
-          <ul class="resp-list">
-            <li>Built lightweight, high-performance endpoints using .NET Minimal API</li>
-            <li>Implemented full OpenAPI spec with Swagger UI for client integration</li>
-            <li>Added JWT auth, global exception middleware, and request logging</li>
+            <li>Built modules across a large Blazor + ASP.NET Core MVC app using Clean Architecture and CQRS</li>
+            <li>Implemented RBAC across officers, administrators and ex-servicemen user bases</li>
+            <li>Integrated PDF generation, printing and secure document upload with encryption for official correspondence</li>
           </ul>
         </div>
       </div>
@@ -1183,35 +677,32 @@
 <!-- EDUCATION -->
 <section id="education">
   <div class="container">
-    <div class="sec-tag fade-up">06 — Academic Background</div>
+    <div class="sec-tag fade-up">Education</div>
     <h2 class="sec-title fade-up">Education</h2>
-    <p class="sec-sub fade-up">Strong academic foundation complemented by intensive practical training and real-world project experience.</p>
-    <div class="edu-grid">
-      <div class="edu-card fade-up">
-        <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
-        <div>
-          <div class="edu-degree">Master of Computer Applications - MCA</div>
-          <div class="edu-school">Uttaranchal University</div>
-          <div class="edu-meta"><span class="ebadge blue">Jan 2026</span></div>
+    <p class="sec-sub fade-up">Academic foundation complemented by four years of hands-on project experience.</p>
+    <div class="edu-lang-grid">
+      <div class="edu-grid">
+        <div class="edu-card fade-up">
+          <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
+          <div>
+            <div class="edu-degree">Master of Computer Applications</div>
+            <div class="edu-school">Uttaranchal University</div>
+            <div class="edu-meta"><span class="ebadge">2024 – 2026 (Ongoing)</span></div>
+          </div>
+        </div>
+        <div class="edu-card fade-up" style="transition-delay:.06s">
+          <div class="edu-icon"><i class="fas fa-book-open"></i></div>
+          <div>
+            <div class="edu-degree">B.A. — Mathematics</div>
+            <div class="edu-school">H.N.B. P.G. College, Khatima</div>
+            <div class="edu-meta"><span class="ebadge">Completed July 2024</span></div>
+          </div>
         </div>
       </div>
-        <div class="edu-card fade-up" style="transition-delay:.14s">
-        <div class="edu-icon"><i class="fas fa-book-open"></i></div>
-        <div>
-          <div class="edu-degree">Bachelor's in Maths</div>
-          <div class="edu-school"> H.B.B. PG. College, Khatima</div>
-          <div class="edu-meta"><span class="ebadge blue">July 2024</span></div>
-        </div>
+      <div class="lang-card fade-up" style="transition-delay:.12s">
+        <h4><i class="fas fa-map-marker-alt"></i> Based In</h4>
+        <p style="font-size:.85rem;color:var(--ink-soft);line-height:1.7;">Working out of Delhi, NCR — originally from Khatima, Uttarakhand. Open to remote and on-site roles across India.</p>
       </div>
-      <div class="edu-card fade-up" style="transition-delay:.07s">
-        <div class="edu-icon"><i class="fas fa-school"></i></div>
-        <div>
-          <div class="edu-degree">Intermediate (12th Grade)</div>
-          <div class="edu-school"> G.I.C Lohaghat, Champawat</div>
-          <div class="edu-meta"><span class="ebadge blue">April 2022</span><span class="ebadge amber">75%</span></div>
-        </div>
-      </div>
-    
     </div>
   </div>
 </section>
@@ -1221,13 +712,13 @@
   <div class="container">
     <div class="contact-grid">
       <div class="fade-up">
-        <div class="sec-tag">07 — Let's Work Together</div>
-        <h2 class="contact-heading">Ready to Build<br>Something <span>Great?</span></h2>
-        <p class="contact-intro">Whether you need a Blazor web application, a secure REST API, an e-commerce solution, or a full enterprise system — I'm here to deliver clean, secure, and scalable .NET software. Let's discuss your project.</p>
+        <div class="sec-tag">Contact</div>
+        <h2 class="contact-heading">Let's Talk About<br>Your Next <span>Hire.</span></h2>
+        <p class="contact-intro">I'm actively open to full-time roles and new opportunities as a Full Stack .NET Developer. If your team needs someone who builds secure, scalable applications and takes ownership end-to-end, I'd love to connect.</p>
         <div class="contact-links">
-          <a href="mailto:pantmanoj2005@gmail.com" class="clink">
+          <a href="mailto:manojpant.dev@gmail.com" class="clink">
             <i class="fas fa-envelope"></i>
-            <div><span class="clink-label">Email</span><span class="clink-val">pantmanoj2005@gmail.com</span></div>
+            <div><span class="clink-label">Email</span><span class="clink-val">manojpant.dev@gmail.com</span></div>
           </a>
           <a href="tel:+919258029267" class="clink">
             <i class="fas fa-phone"></i>
@@ -1244,14 +735,13 @@
         </div>
       </div>
       <div class="hire-box fade-up" style="transition-delay:.15s">
-        <div class="hire-glow"></div>
         <i class="fas fa-handshake big"></i>
-        <h3>Hire Me for Your Next Project</h3>
-        <p>Looking for a reliable, security-focused .NET developer who delivers clean, scalable, and maintainable applications on time? I'd love to hear about your requirements.</p>
-        <a href="mailto:pantmanoj2005@gmail.com" class="hire-btn">
+        <h3>Let's Build Something Reliable</h3>
+        <p>Looking for a dependable, security-minded .NET developer who ships clean, maintainable code and works well across teams? I'd love to hear about the role.</p>
+        <a href="mailto:manojpant.dev@gmail.com" class="hire-btn">
           <i class="fas fa-paper-plane"></i> Send Me a Message
         </a>
-        <div class="hire-note"> Based in Delhi &nbsp;·&nbsp; Open to Remote &amp; Freelance</div>
+        <div class="hire-note">Based in Delhi · Open to Remote &amp; On-site Roles</div>
       </div>
     </div>
   </div>
@@ -1262,55 +752,12 @@
 </footer>
 
 <script>
-  // Fade-up on scroll
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-
-  // Stat bars top border
-  const statObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.querySelectorAll('.stat-item').forEach(s => s.classList.add('visible'));
-        statObs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.4 });
-  const statsEl = document.querySelector('.hero-stats');
-  if (statsEl) statObs.observe(statsEl);
-
-  // Animate tech bars
-  const barObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.querySelectorAll('.tech-bar').forEach(bar => {
-          const target = bar.getAttribute('data-width');
-          setTimeout(() => { bar.style.width = target; }, 200);
-        });
-        barObs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.3 });
-  document.querySelectorAll('.tech-visual').forEach(el => barObs.observe(el));
-
-  // Subtle cursor glow on hero
-  const hero = document.querySelector('.hero');
-  if (hero) {
-    hero.addEventListener('mousemove', (e) => {
-      const rect = hero.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      hero.style.setProperty('--mx', x + 'px');
-      hero.style.setProperty('--my', y + 'px');
-    });
-  }
 </script>
 </body>
 </html>
-
-
-
-
